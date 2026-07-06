@@ -1,0 +1,9 @@
+[
+  {
+    "id": "rsa-cryptography-1",
+    "prompt": "ในระบบ RSA ค่า e และ d ต้องมีความสัมพันธ์แบบใด?",
+    "choices": ["เท่ากัน", "เป็น modular inverse กัน mod φ(n)", "เป็น prime ทั้งคู่", "เลือกอะไรก็ได้"],
+    "correctIndex": 1,
+    "explanation": "e และ d ต้องเป็น modular inverse กันภายใต้ mod φ(n) เพื่อให้เข้ารหัส/ถอดรหัสกลับมาถูกต้อง"
+  }
+]

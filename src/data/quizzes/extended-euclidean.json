@@ -1,0 +1,9 @@
+[
+  {
+    "id": "extended-euclidean-1",
+    "prompt": "Extended Euclidean Algorithm ใช้หาอะไรนอกเหนือจาก gcd(a,b)?",
+    "choices": ["ค่า x, y ที่ ax+by=gcd(a,b)", "ค่า lcm(a,b)", "จำนวน prime factor", "φ(a,b)"],
+    "correctIndex": 0,
+    "explanation": "การย้อนรอย (back-substitute) ของ Euclidean algorithm ให้สัมประสิทธิ์ x,y ตาม Bézout's identity"
+  }
+]

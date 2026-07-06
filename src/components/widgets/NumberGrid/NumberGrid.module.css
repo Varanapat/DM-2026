@@ -1,0 +1,42 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: var(--space-1);
+}
+
+.cell {
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-border);
+  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.cell:hover:not(:disabled) {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.default {
+  background: var(--color-border);
+}
+
+.success {
+  background: color-mix(in srgb, var(--color-success) 25%, transparent);
+  color: var(--color-success);
+}
+
+.danger {
+  background: color-mix(in srgb, var(--color-danger) 18%, transparent);
+  color: var(--color-danger);
+  opacity: 0.6;
+}
+
+.muted {
+  opacity: 0.35;
+}

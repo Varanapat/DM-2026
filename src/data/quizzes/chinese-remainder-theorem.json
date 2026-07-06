@@ -1,0 +1,9 @@
+[
+  {
+    "id": "chinese-remainder-theorem-1",
+    "prompt": "CRT รับประกันคำตอบเดียวไม่ซ้ำได้เมื่อ moduli มีคุณสมบัติใด?",
+    "choices": ["เท่ากันหมด", "coprime กันเป็นคู่ ๆ", "เป็น prime ทั้งหมด", "หารกันลงตัว"],
+    "correctIndex": 1,
+    "explanation": "ถ้า moduli ไม่ coprime กัน ระบบ congruence อาจไม่มีคำตอบเดียวที่รับประกันได้"
+  }
+]

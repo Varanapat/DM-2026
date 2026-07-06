@@ -1,0 +1,9 @@
+.expression {
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  padding: var(--space-3);
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  display: inline-block;
+}

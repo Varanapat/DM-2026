@@ -1,0 +1,22 @@
+.card {
+  min-height: var(--touch-target-min);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+}
+
+.label {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.wrong {
+  color: var(--color-danger);
+}
+
+.correct {
+  color: var(--color-success);
+}

@@ -1,0 +1,24 @@
+.body {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: var(--space-5);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.content {
+  min-width: 0;
+  padding-bottom: var(--space-6);
+}
+
+@media (max-width: 640px) {
+  .body {
+    display: block;
+    padding: var(--space-3);
+  }
+
+  .content {
+    padding-bottom: 72px; /* leave room for bottom sheet toggle */
+  }
+}

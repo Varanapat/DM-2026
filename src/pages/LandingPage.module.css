@@ -1,0 +1,28 @@
+.hero {
+  padding: var(--space-6) var(--space-4) var(--space-4);
+  text-align: center;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+.title {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-3);
+  color: var(--color-accent);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--fs-lg);
+}
+
+.mapSection {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) var(--space-6);
+}
+
+.mapHeading {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-3);
+}

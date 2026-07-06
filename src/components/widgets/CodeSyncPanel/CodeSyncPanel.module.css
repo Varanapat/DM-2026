@@ -1,0 +1,19 @@
+.panel {
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  overflow-x: auto;
+}
+
+.line {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  white-space: pre;
+}
+
+.active {
+  background: color-mix(in srgb, var(--color-secondary) 25%, transparent);
+}

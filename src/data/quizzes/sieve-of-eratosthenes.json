@@ -1,0 +1,9 @@
+[
+  {
+    "id": "sieve-1",
+    "prompt": "เมื่อหา prime ใน 1–100 ด้วย Sieve of Eratosthenes ต้องตัด multiples ของ prime ไปจนถึงตัวใด?",
+    "choices": ["100", "50", "√100 = 10", "2"],
+    "correctIndex": 2,
+    "explanation": "หลังจากตัด multiples ของ prime ที่ ≤ √n แล้ว จะไม่มี composite ตัวไหนหลงเหลืออีก"
+  }
+]

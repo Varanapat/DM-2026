@@ -1,0 +1,84 @@
+/* Design tokens — "Cozy Minimal" palette per CLUADE.md Section 1 */
+:root {
+  /* Color — light (default) */
+  --color-bg: #faf7f2;
+  --color-bg-elevated: #ffffff;
+  --color-text: #2a2724;
+  --color-text-muted: #6b655d;
+  --color-accent: #2d6e6e;
+  --color-accent-hover: #255c5c;
+  --color-accent-contrast: #ffffff;
+  --color-secondary: #e8a33d;
+  --color-secondary-contrast: #2a2724;
+  --color-success: #3e8659;
+  --color-danger: #c1503d;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-focus-ring: #2d6e6e;
+
+  /* Typography */
+  --font-ui: 'Inter', 'Nunito', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-elevated: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  /* Motion */
+  --transition-fast: 200ms ease-out;
+  --transition-base: 300ms ease-out;
+
+  /* Layout */
+  --breakpoint-mobile: 640px;
+  --touch-target-min: 44px;
+  --content-max-width: 880px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+}
+
+[data-theme='dark'] {
+  --color-bg: #1c1a18;
+  --color-bg-elevated: #262320;
+  --color-text: #f3efe9;
+  --color-text-muted: #a69e93;
+  --color-accent: #3a8a8a;
+  --color-accent-hover: #4a9a9a;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-focus-ring: #4a9a9a;
+  --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.3);
+  --shadow-elevated: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+/* Respect system preference before JS/ThemeContext sets an explicit override */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']) {
+    --color-bg: #1c1a18;
+    --color-bg-elevated: #262320;
+    --color-text: #f3efe9;
+    --color-text-muted: #a69e93;
+    --color-accent: #3a8a8a;
+    --color-accent-hover: #4a9a9a;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-focus-ring: #4a9a9a;
+    --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.3);
+    --shadow-elevated: 0 4px 20px rgba(0, 0, 0, 0.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+  }
+}

@@ -1,0 +1,27 @@
+.section {
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-border);
+  scroll-margin-top: 120px;
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.heading {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-3);
+  color: var(--color-text);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.widgetList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

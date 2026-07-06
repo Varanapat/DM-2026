@@ -1,0 +1,29 @@
+.wrapper {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.title {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.intro {
+  color: var(--color-text-muted);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.blockTitle {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-accent);
+}

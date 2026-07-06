@@ -1,0 +1,9 @@
+[
+  {
+    "id": "fermats-little-theorem-1",
+    "prompt": "ตามทฤษฎีบทเล็กของแฟร์มา ถ้า p เป็น prime และ gcd(a,p)=1 แล้ว a^(p-1) mod p มีค่าเท่าไร?",
+    "choices": ["0", "1", "p-1", "a"],
+    "correctIndex": 1,
+    "explanation": "Fermat's Little Theorem ระบุว่า a^(p-1) ≡ 1 (mod p) เสมอเมื่อเงื่อนไขครบ"
+  }
+]

@@ -1,0 +1,16 @@
+.wrapper {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+}
+
+.title {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-3);
+}
+
+.link {
+  color: var(--color-accent);
+  font-weight: 600;
+}

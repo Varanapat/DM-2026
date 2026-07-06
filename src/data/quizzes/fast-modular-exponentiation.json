@@ -1,0 +1,9 @@
+[
+  {
+    "id": "fast-modular-exponentiation-1",
+    "prompt": "การคำนวณ a^13 ด้วย fast exponentiation ใช้การคูณเข้ากับ bit ใดของเลขฐานสองของ 13 (1101)?",
+    "choices": ["ทุก bit เท่ากันหมด", "เฉพาะ bit ที่เป็น 1", "เฉพาะ bit ที่เป็น 0", "เฉพาะ bit แรก"],
+    "correctIndex": 1,
+    "explanation": "Binary exponentiation คูณผลลัพธ์เข้าเฉพาะตอนที่ bit ของ exponent เป็น 1 เท่านั้น"
+  }
+]

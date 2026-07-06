@@ -1,0 +1,44 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.rowLabel {
+  width: 96px;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.track {
+  flex: 1;
+  height: 24px;
+  background: var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.fillA {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width var(--transition-base);
+}
+
+.fillB {
+  height: 100%;
+  background: var(--color-secondary);
+  transition: width var(--transition-base);
+}
+
+.value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  min-width: 40px;
+  text-align: right;
+}

@@ -1,0 +1,9 @@
+[
+  {
+    "id": "gcd-1",
+    "prompt": "gcd(48, 18) มีค่าเท่าไร?",
+    "choices": ["6", "9", "12", "18"],
+    "correctIndex": 0,
+    "explanation": "gcd(48,18) = gcd(18,12) = gcd(12,6) = gcd(6,0) = 6"
+  }
+]
