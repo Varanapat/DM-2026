@@ -5,5 +5,19 @@
     "choices": ["24", "12", "2", "10"],
     "correctIndex": 1,
     "explanation": "lcm(4,6) × gcd(4,6) = 4×6 = 24 และ gcd(4,6)=2 ดังนั้น lcm(4,6) = 24/2 = 12"
+  },
+  {
+    "id": "lcm-2",
+    "prompt": "lcm(a,b) จะเท่ากับ a×b พอดีเมื่อใด?",
+    "choices": ["เมื่อ gcd(a,b) = 1 (a,b coprime กัน)", "เสมอไม่ว่ากรณีใด", "เมื่อ a = b", "ไม่มีกรณีที่เป็นไปได้"],
+    "correctIndex": 0,
+    "explanation": "จากสูตร lcm×gcd=a×b ถ้า gcd(a,b)=1 จะได้ lcm(a,b)=a×b พอดี"
+  },
+  {
+    "id": "lcm-3",
+    "prompt": "lcm(7, 5) มีค่าเท่าไร?",
+    "choices": ["12", "35", "1", "70"],
+    "correctIndex": 1,
+    "explanation": "7 และ 5 เป็น coprime กัน (gcd=1) ดังนั้น lcm(7,5) = 7×5 = 35"
   }
 ]

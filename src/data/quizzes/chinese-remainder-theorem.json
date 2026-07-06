@@ -5,5 +5,19 @@
     "choices": ["เท่ากันหมด", "coprime กันเป็นคู่ ๆ", "เป็น prime ทั้งหมด", "หารกันลงตัว"],
     "correctIndex": 1,
     "explanation": "ถ้า moduli ไม่ coprime กัน ระบบ congruence อาจไม่มีคำตอบเดียวที่รับประกันได้"
+  },
+  {
+    "id": "chinese-remainder-theorem-2",
+    "prompt": "CRT รับประกันคำตอบไม่ซ้ำกันใน mod เท่าใด เมื่อ moduli คือ m1, m2 (coprime กัน)?",
+    "choices": ["m1 × m2", "m1 + m2", "max(m1, m2)", "gcd(m1, m2)"],
+    "correctIndex": 0,
+    "explanation": "คำตอบไม่ซ้ำกันในช่วง mod (m1×m2) ตามทฤษฎีบท"
+  },
+  {
+    "id": "chinese-remainder-theorem-3",
+    "prompt": "x ≡ 1 (mod 3) และ x ≡ 1 (mod 5) ค่า x ที่น้อยที่สุดที่มากกว่า 0 คือเท่าไร?",
+    "choices": ["1", "15", "16", "4"],
+    "correctIndex": 0,
+    "explanation": "x=1 สอดคล้องทั้งสองสมการอยู่แล้ว (1 mod 3 = 1, 1 mod 5 = 1)"
   }
 ]

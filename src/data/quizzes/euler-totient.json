@@ -5,5 +5,19 @@
     "choices": ["6", "8", "9", "3"],
     "correctIndex": 0,
     "explanation": "ตัวเลข 1-9 ที่ coprime กับ 9 คือ 1,2,4,5,7,8 รวม 6 ตัว (ตัดตัวที่หารด้วย 3 ลงตัวออก)"
+  },
+  {
+    "id": "euler-totient-2",
+    "prompt": "φ(7) มีค่าเท่าไร (7 เป็น prime)?",
+    "choices": ["6", "7", "5", "1"],
+    "correctIndex": 0,
+    "explanation": "prime p ทุกตัว φ(p) = p-1 เสมอ เพราะทุกเลข 1 ถึง p-1 coprime กับ p"
+  },
+  {
+    "id": "euler-totient-3",
+    "prompt": "φ(12) มีค่าเท่าไร?",
+    "choices": ["4", "6", "3", "8"],
+    "correctIndex": 0,
+    "explanation": "เลขที่ coprime กับ 12 ใน 1-12 คือ 1, 5, 7, 11 รวม 4 ตัว"
   }
 ]

@@ -1,9 +1,23 @@
 [
   {
     "id": "fermats-little-theorem-1",
-    "prompt": "ตามทฤษฎีบทเล็กของแฟร์มา ถ้า p เป็น prime และ gcd(a,p)=1 แล้ว a^(p-1) mod p มีค่าเท่าไร?",
+    "prompt": "ตามทฤษฎีบทเล็กของแฟร์มา a^(p-1) mod p มีค่าเท่าไรเสมอ เมื่อ p เป็น prime และ gcd(a,p)=1?",
     "choices": ["0", "1", "p-1", "a"],
     "correctIndex": 1,
     "explanation": "Fermat's Little Theorem ระบุว่า a^(p-1) ≡ 1 (mod p) เสมอเมื่อเงื่อนไขครบ"
+  },
+  {
+    "id": "fermats-little-theorem-2",
+    "prompt": "เงื่อนไขใดจำเป็นสำหรับการใช้ Fermat's Little Theorem?",
+    "choices": ["p เป็น prime และ gcd(a,p)=1", "p เป็นเลขคู่", "a ต้องมากกว่า p เสมอ", "p ต้องเป็นเลขคี่เท่านั้น"],
+    "correctIndex": 0,
+    "explanation": "ถ้า p ไม่ใช่ prime หรือ gcd(a,p)≠1 ทฤษฎีบทนี้ใช้ไม่ได้"
+  },
+  {
+    "id": "fermats-little-theorem-3",
+    "prompt": "2^6 mod 7 มีค่าเท่าไร ตามทฤษฎีบทนี้?",
+    "choices": ["1", "2", "6", "0"],
+    "correctIndex": 0,
+    "explanation": "7 เป็น prime และ gcd(2,7)=1 ดังนั้น 2^(7-1) = 2^6 ≡ 1 (mod 7)"
   }
 ]

@@ -1,0 +1,44 @@
+export interface EuclideanStep {
+  /** the a, b at the start of this step, before reducing */
+  a: number;
+  b: number;
+  quotient: number;
+  remainder: number;
+}
+
+export function gcd(a: number, b: number): number {
+  let x = Math.abs(Math.trunc(a));
+  let y = Math.abs(Math.trunc(b));
+  while (y !== 0) {
+    [x, y] = [y, x % y];
+  }
+  return x;
+}
+
+/** Full trace of the Euclidean algorithm: one entry per a,b pair encountered,
+ * ending once b reaches 0 (gcd = last non-zero b's step `a`... i.e. steps.at(-1).b before the final 0). */
+export function gcdSteps(a: number, b: number): EuclideanStep[] {
+  const steps: EuclideanStep[] = [];
+  let x = Math.abs(Math.trunc(a));
+  let y = Math.abs(Math.trunc(b));
+
+  if (y === 0) {
+    return steps;
+  }
+
+  while (y !== 0) {
+    const quotient = Math.floor(x / y);
+    const remainder = x % y;
+    steps.push({ a: x, b: y, quotient, remainder });
+    x = y;
+    y = remainder;
+  }
+
+  return steps;
+}
+
+/** Worst-case number of checks a naive "try every candidate divisor" approach
+ * needs — used only for the naive-vs-fast step-count comparison widget. */
+export function naiveDivisorCheckCount(a: number, b: number): number {
+  return Math.max(Math.min(Math.abs(a), Math.abs(b)), 1);
+}
