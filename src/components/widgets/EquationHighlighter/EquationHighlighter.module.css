@@ -1,9 +1,17 @@
 .expression {
-  font-family: var(--font-mono);
   font-size: var(--fs-lg);
   padding: var(--space-3);
   background: var(--color-bg-elevated);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
   display: inline-block;
+  color: var(--color-text);
+}
+
+.expression :global(.eq-highlight) {
+  color: var(--color-secondary-contrast);
+  background: color-mix(in srgb, var(--color-secondary) 45%, transparent);
+  border-radius: 4px;
+  padding: 1px 3px;
+  transition: background-color var(--transition-fast);
 }

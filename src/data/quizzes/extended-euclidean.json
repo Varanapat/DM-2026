@@ -5,5 +5,24 @@
     "choices": ["ค่า x, y ที่ ax+by=gcd(a,b)", "ค่า lcm(a,b)", "จำนวน prime factor", "φ(a,b)"],
     "correctIndex": 0,
     "explanation": "การย้อนรอย (back-substitute) ของ Euclidean algorithm ให้สัมประสิทธิ์ x,y ตาม Bézout's identity"
+  },
+  {
+    "id": "extended-euclidean-2",
+    "prompt": "Bézout's identity กล่าวว่าอย่างไร?",
+    "choices": [
+      "มี integer x, y ที่ทำให้ ax+by=gcd(a,b) เสมอ",
+      "a และ b ต้องเป็น prime ทั้งคู่",
+      "x, y ต้องเป็นจำนวนบวกเสมอ",
+      "สมการนี้มีคำตอบเดียวเท่านั้น"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bézout's identity รับประกันว่ามี integer x,y (อาจติดลบ) ที่ทำให้สมการนี้เป็นจริงเสมอ"
+  },
+  {
+    "id": "extended-euclidean-3",
+    "prompt": "modular inverse ของ a mod n จะมีอยู่จริงเมื่อใด?",
+    "choices": ["เมื่อ gcd(a,n) = 1", "เสมอไม่ว่ากรณีใด", "เมื่อ a เป็น prime เท่านั้น", "เมื่อ n เป็นเลขคู่"],
+    "correctIndex": 0,
+    "explanation": "modular inverse มีอยู่ก็ต่อเมื่อ a และ n coprime กัน (gcd=1)"
   }
 ]

@@ -26,14 +26,14 @@
 
 .fillA {
   height: 100%;
+  width: 0%;
   background: var(--color-accent);
-  transition: width var(--transition-base);
 }
 
 .fillB {
   height: 100%;
+  width: 0%;
   background: var(--color-secondary);
-  transition: width var(--transition-base);
 }
 
 .value {
