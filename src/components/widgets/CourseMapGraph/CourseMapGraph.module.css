@@ -5,14 +5,12 @@
 
 .wrapper {
   position: relative;
-  width: 100%;
 }
 
 .svg {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
   overflow: visible;
 }
 
@@ -24,14 +22,14 @@
 
 .edgeActive {
   stroke: var(--color-accent);
-  opacity: 0.55;
+  opacity: 0.6;
 }
 
 .node {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 168px;
-  min-height: 64px;
+  width: 260px;
+  min-height: 68px;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   background: var(--color-bg-elevated);
@@ -43,13 +41,20 @@
   justify-content: center;
   gap: 2px;
   text-align: center;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-base);
   line-height: 1.3;
   cursor: pointer;
   transition:
     transform var(--transition-fast),
     box-shadow var(--transition-fast),
     border-color var(--transition-fast);
+}
+
+.nodeBranch {
+  width: 200px;
+  min-height: 56px;
+  font-size: var(--fs-sm);
+  border-style: dashed;
 }
 
 .node:hover,
