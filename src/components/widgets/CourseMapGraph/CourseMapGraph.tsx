@@ -13,15 +13,14 @@ function findNextTopicId(topics: CourseMapGraphProps['topics'], completedIds: Se
   return topic?.id ?? null;
 }
 
-/** roadmap.sh-inspired node-link graph — levels/branches computed from the
- * topic dependency graph (src/utils/roadmapLayout.ts). Falls back to a simple
- * vertical list on mobile since a wide branching graph doesn't fit narrow screens. */
+/** roadmap.sh-inspired single-spine roadmap — one straight vertical path down
+ * the center (src/data/roadmapStructure.ts) with short horizontal branch
+ * stubs for closely-related topics, so no connector lines cross. Falls back
+ * to a simple vertical list on mobile. */
 export function CourseMapGraph({ topics, completedIds, onNodeClick }: CourseMapGraphProps) {
   const isMobile = useIsMobile();
-  const layout = useMemo(() => computeRoadmapLayout(topics), [topics]);
+  const layout = useMemo(() => computeRoadmapLayout(), []);
   const nextTopicId = useMemo(() => findNextTopicId(topics, completedIds), [topics, completedIds]);
-  const maxRowSize = Math.max(...layout.rows.map((row) => row.length));
-  const minWidth = Math.max(maxRowSize * 190, 720);
 
   const stateOf = (topicId: string, dependsOn: string[]): NodeState => {
     if (completedIds.has(topicId)) return 'completed';
@@ -69,19 +68,27 @@ export function CourseMapGraph({ topics, completedIds, onNodeClick }: CourseMapG
         </span>
       </div>
       <div className={styles.scrollContainer}>
-        <div className={styles.wrapper} style={{ height: layout.totalHeightPx, minWidth }}>
-          <svg className={styles.svg} viewBox={`0 0 100 ${layout.totalHeightPx}`} preserveAspectRatio="none">
-            {layout.edges.map((edge) => {
-              const midY = (edge.from.yPx + edge.to.yPx) / 2;
-              const d = `M ${edge.from.xPercent} ${edge.from.yPx} C ${edge.from.xPercent} ${midY}, ${edge.to.xPercent} ${midY}, ${edge.to.xPercent} ${edge.to.yPx}`;
-              const active = completedIds.has(edge.from.topic.id);
-              return <path key={`${edge.from.topic.id}-${edge.to.topic.id}`} d={d} className={active ? `${styles.edge} ${styles.edgeActive}` : styles.edge} />;
+        <div className={styles.wrapper} style={{ width: layout.width, height: layout.height, margin: '0 auto' }}>
+          <svg className={styles.svg} width={layout.width} height={layout.height}>
+            {layout.connectors.map((connector) => {
+              const active = completedIds.has(connector.fromTopicId);
+              return (
+                <line
+                  key={connector.id}
+                  x1={connector.x1}
+                  y1={connector.y1}
+                  x2={connector.x2}
+                  y2={connector.y2}
+                  className={active ? `${styles.edge} ${styles.edgeActive}` : styles.edge}
+                />
+              );
             })}
           </svg>
           {layout.nodes.map((node) => {
             const state = stateOf(node.topic.id, node.topic.dependsOn);
             const classes = [
               styles.node,
+              node.kind === 'branch' ? styles.nodeBranch : '',
               state === 'completed' ? styles.nodeCompleted : '',
               state === 'next' ? styles.nodeNext : '',
               state === 'locked' ? styles.nodeMuted : '',
@@ -93,7 +100,7 @@ export function CourseMapGraph({ topics, completedIds, onNodeClick }: CourseMapG
                 key={node.topic.id}
                 type="button"
                 className={classes}
-                style={{ left: `${node.xPercent}%`, top: `${node.yPx}px` }}
+                style={{ left: `${node.x}px`, top: `${node.y}px` }}
                 onClick={() => onNodeClick(node.topic.id)}
                 aria-label={`${node.topic.titleTh}${state === 'completed' ? ' (เรียนแล้ว)' : ''}${state === 'next' ? ' (แนะนำให้เรียนต่อ)' : ''}`}
               >

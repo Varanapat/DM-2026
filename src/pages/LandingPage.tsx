@@ -12,10 +12,10 @@ export function LandingPage() {
     <div className={styles.page}>
       <section className={styles.hero}>
         <div className={styles.heroText}>
-          <h1 className={styles.title}>Interactive Number Theory Roadmap</h1>
-          <p className={styles.subtitle}>
-            แผนที่การเรียนรู้ Number Theory แบบ interactive — เลือกหัวข้อจาก roadmap ด้านล่าง เรียนรู้ผ่านการเล่นและลงมือทำ
-            ไม่ใช่แค่อ่านทฤษฎีบท
+          <h1 className={styles.title}>Discrete Math</h1>
+          <p className={styles.unit}>Number Theory</p>
+          <p className={styles.tagline}>
+            แผนที่การเรียนรู้แบบ interactive — เลือกหัวข้อจาก roadmap ด้านล่าง เรียนรู้ผ่านการเล่นและลงมือทำ ไม่ใช่แค่อ่านทฤษฎีบท
           </p>
         </div>
         <div className={styles.stats}>

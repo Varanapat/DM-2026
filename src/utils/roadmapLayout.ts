@@ -1,85 +1,90 @@
-import type { TopicMeta } from '@/data/topics';
+import { ROADMAP_STRUCTURE } from '@/data/roadmapStructure';
+import { getTopicById, type TopicMeta } from '@/data/topics';
 
 export interface RoadmapNode {
   topic: TopicMeta;
-  level: number;
-  /** Horizontal position as a percentage (0-100) of the container width. */
-  xPercent: number;
-  /** Vertical position in pixels from the top of the roadmap container. */
-  yPx: number;
+  kind: 'spine' | 'branch';
+  x: number;
+  y: number;
 }
 
-export interface RoadmapEdge {
-  from: RoadmapNode;
-  to: RoadmapNode;
+export interface RoadmapConnector {
+  id: string;
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  /** id of the topic this connector originates from — used to color it "active" once that topic is completed. */
+  fromTopicId: string;
 }
 
 export interface RoadmapLayout {
   nodes: RoadmapNode[];
-  nodesById: Map<string, RoadmapNode>;
-  edges: RoadmapEdge[];
-  rows: TopicMeta[][];
-  totalHeightPx: number;
+  connectors: RoadmapConnector[];
+  width: number;
+  height: number;
+  centerX: number;
 }
 
-const ROW_HEIGHT = 150;
-const TOP_PADDING = 70;
-const BOTTOM_PADDING = 70;
+const ROW_HEIGHT = 130;
+const TOP_PADDING = 60;
+const BOTTOM_PADDING = 60;
+export const SPINE_WIDTH = 260;
+export const BRANCH_WIDTH = 200;
+const BRANCH_GAP = 48;
+const SIDE_MARGIN = 40;
 
-/** Longest-path-from-root depth for each topic, based on dependsOn edges. */
-function computeLevels(topics: TopicMeta[]): Map<string, number> {
-  const byId = new Map(topics.map((t) => [t.id, t]));
-  const levels = new Map<string, number>();
-
-  function levelOf(id: string): number {
-    if (levels.has(id)) return levels.get(id)!;
-    const topic = byId.get(id);
-    if (!topic || topic.dependsOn.length === 0) {
-      levels.set(id, 0);
-      return 0;
-    }
-    const level = 1 + Math.max(...topic.dependsOn.map((depId) => levelOf(depId)));
-    levels.set(id, level);
-    return level;
-  }
-
-  topics.forEach((t) => levelOf(t.id));
-  return levels;
-}
-
-export function computeRoadmapLayout(topics: TopicMeta[]): RoadmapLayout {
-  const levels = computeLevels(topics);
-  const maxLevel = Math.max(...Array.from(levels.values()));
-
-  const rows: TopicMeta[][] = Array.from({ length: maxLevel + 1 }, () => []);
-  topics.forEach((topic) => {
-    rows[levels.get(topic.id)!].push(topic);
-  });
+/**
+ * Single straight vertical spine down the center, with short horizontal
+ * branch stubs — no diagonal or long-spanning connectors, so nothing crosses.
+ */
+export function computeRoadmapLayout(): RoadmapLayout {
+  const branchOffset = SPINE_WIDTH / 2 + BRANCH_GAP + BRANCH_WIDTH / 2;
+  const centerX = branchOffset + BRANCH_WIDTH / 2 + SIDE_MARGIN;
+  const width = centerX * 2;
 
   const nodes: RoadmapNode[] = [];
-  const nodesById = new Map<string, RoadmapNode>();
+  const connectors: RoadmapConnector[] = [];
 
-  rows.forEach((row, level) => {
-    const yPx = TOP_PADDING + level * ROW_HEIGHT;
-    row.forEach((topic, index) => {
-      const xPercent = ((index + 0.5) / row.length) * 100;
-      const node: RoadmapNode = { topic, level, xPercent, yPx };
-      nodes.push(node);
-      nodesById.set(topic.id, node);
+  ROADMAP_STRUCTURE.forEach((item, index) => {
+    const y = TOP_PADDING + index * ROW_HEIGHT;
+    const topic = getTopicById(item.topicId);
+    if (!topic) return;
+
+    nodes.push({ topic, kind: 'spine', x: centerX, y });
+
+    if (index > 0) {
+      const prevY = TOP_PADDING + (index - 1) * ROW_HEIGHT;
+      connectors.push({
+        id: `spine-${item.topicId}`,
+        x1: centerX,
+        y1: prevY,
+        x2: centerX,
+        y2: y,
+        fromTopicId: ROADMAP_STRUCTURE[index - 1].topicId,
+      });
+    }
+
+    (item.branches ?? []).forEach((branch) => {
+      const branchTopic = getTopicById(branch.topicId);
+      if (!branchTopic) return;
+      const bx = branch.side === 'left' ? centerX - branchOffset : centerX + branchOffset;
+      nodes.push({ topic: branchTopic, kind: 'branch', x: bx, y });
+
+      const spineEdgeX = branch.side === 'left' ? centerX - SPINE_WIDTH / 2 : centerX + SPINE_WIDTH / 2;
+      const branchEdgeX = branch.side === 'left' ? bx + BRANCH_WIDTH / 2 : bx - BRANCH_WIDTH / 2;
+      connectors.push({
+        id: `branch-${branch.topicId}`,
+        x1: spineEdgeX,
+        y1: y,
+        x2: branchEdgeX,
+        y2: y,
+        fromTopicId: item.topicId,
+      });
     });
   });
 
-  const edges: RoadmapEdge[] = [];
-  topics.forEach((topic) => {
-    const to = nodesById.get(topic.id);
-    if (!to) return;
-    topic.dependsOn.forEach((depId) => {
-      const from = nodesById.get(depId);
-      if (from) edges.push({ from, to });
-    });
-  });
+  const height = TOP_PADDING + (ROADMAP_STRUCTURE.length - 1) * ROW_HEIGHT + BOTTOM_PADDING;
 
-  const totalHeightPx = TOP_PADDING + maxLevel * ROW_HEIGHT + BOTTOM_PADDING;
-
-  return { nodes, nodesById, edges, rows, totalHeightPx };
+  return { nodes, connectors, width, height, centerX };
 }
