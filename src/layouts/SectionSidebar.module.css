@@ -1,15 +1,17 @@
 .sidebar {
-  position: sticky;
-  top: calc(56px + 48px);
-  align-self: start;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  padding: var(--space-3);
-  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-3);
   background: var(--color-bg-elevated);
-  box-shadow: var(--shadow-soft);
-  min-width: 180px;
+  border-right: 1px solid var(--color-border);
+  z-index: 10;
 }
 
 .link {

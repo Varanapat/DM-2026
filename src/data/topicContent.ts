@@ -1,7 +1,6 @@
 export interface TopicContent {
   coreConceptTh: string;
   misconceptionTh: string;
-  practiceChallengeTh: string;
   primaryWidgets: string[];
 }
 
@@ -12,85 +11,71 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
   divisibility: {
     coreConceptTh: 'b หารด้วย a ลงตัว ก็ต่อเมื่อมี integer k ที่ b = a×k',
     misconceptionTh: 'สับสนระหว่าง "a หาร b" กับ "b หาร a" (เทียบ 3|12 ✅ vs 12|3 ❌)',
-    practiceChallengeTh: 'หาตัวหารร่วมทั้งหมดของ 24 และ 36 ให้ครบภายใน 30 วิ',
     primaryWidgets: ['NumberGrid', 'SliderInput'],
   },
   primes: {
     coreConceptTh: 'จำนวนเต็ม > 1 ที่ไม่มีตัวหารอื่นนอกจาก 1 และตัวมันเอง',
     misconceptionTh: '1 ไม่ใช่ prime, เลขคู่ทุกตัว (ยกเว้น 2) ไม่ใช่ prime',
-    practiceChallengeTh: 'หา prime ทั้งหมดใน 1–50 ด้วยมือ ก่อนไปเจอ Sieve ในหัวข้อถัดไป',
     primaryWidgets: ['NumberGrid'],
   },
   'sieve-of-eratosthenes': {
     coreConceptTh: 'เริ่มจาก 2 แล้ว "ตัด" multiples ทั้งหมดออกไปเรื่อย ๆ จนเหลือแต่ prime',
     misconceptionTh: 'คิดว่าต้องตัดจนถึง n ทั้งหมด (จริง ๆ หยุดที่ √n ได้)',
-    practiceChallengeTh: '"เดามือ" ว่า 1–200 มี prime กี่ตัว ก่อนรัน sieve จริงเทียบคำตอบ',
     primaryWidgets: ['NumberGrid', 'StepController'],
   },
   'gcd-euclidean': {
     coreConceptTh: 'ตัวหารร่วมมากที่สุดของสองจำนวน หาได้ด้วยการหารเศษซ้ำ ๆ',
     misconceptionTh: 'คิดว่าต้องหา factor ทั้งหมดก่อนถึงจะหา gcd ได้ (ไม่จำเป็น!)',
-    practiceChallengeTh: 'หา gcd(252, 105) ด้วยมือ ทีละ step ในช่อง input แล้วระบบเช็คให้',
     primaryWidgets: ['StepController', 'CodeSyncPanel', 'BarCompare'],
   },
   lcm: {
     coreConceptTh: 'จำนวนที่น้อยที่สุดที่เป็น multiple ร่วมของทั้งสองตัว',
     misconceptionTh: 'คิดว่า lcm ต้องหาจาก multiples ทั้งหมดเสมอ (ไม่ efficient สำหรับเลขใหญ่)',
-    practiceChallengeTh: 'รถบัสสองสายออกจากป้ายพร้อมกัน ทุกกี่นาทีจะเจอกันอีกครั้ง',
     primaryWidgets: ['SliderInput', 'BarCompare'],
   },
   'prime-factorization': {
     coreConceptTh: 'ทุกจำนวนเต็ม > 1 เขียนเป็นผลคูณของ prime ได้แบบเดียว (ไม่นับลำดับ)',
     misconceptionTh: 'คิดว่าการแตกเลขต่างวิธีจะได้ prime factor ต่างชุด (จริง ๆ ชุดเดียวกันเสมอ)',
-    practiceChallengeTh: 'แตก 360 เป็น prime factorization แล้วใช้หา จำนวนตัวหารทั้งหมดของ 360',
     primaryWidgets: ['FactorTree'],
   },
   'modular-arithmetic': {
     coreConceptTh: 'a mod n คือตำแหน่งที่ a ตกลงบนวงกลมที่มี n ช่อง',
     misconceptionTh: 'คิดว่า mod ให้ผลลบได้ แต่ในคณิตศาสตร์ mod ต้องไม่ติดลบ',
-    practiceChallengeTh: 'ถ้าวันนี้เป็นวันพุธ อีก 100 วันจะเป็นวันอะไร (mod 7)',
     primaryWidgets: ['ClockModulo', 'SliderInput'],
   },
   congruence: {
     coreConceptTh: 'a และ b congruent mod n ก็ต่อเมื่อ n | (a−b)',
     misconceptionTh: 'สับสนระหว่าง "=" กับ "≡" — congruent ไม่ได้แปลว่าค่าเท่ากัน แต่อยู่ "class" เดียวกัน',
-    practiceChallengeTh: 'จัดกลุ่มเลข 1–30 ตาม mod 5 equivalence class ให้ครบทุกกลุ่ม',
     primaryWidgets: ['ClockModulo', 'NumberGrid'],
   },
   'fast-modular-exponentiation': {
     coreConceptTh: 'Binary exponentiation — แตก exponent เป็นเลขฐานสอง แล้วยกกำลังสองต่อเนื่อง คูณเข้าเฉพาะ bit ที่เป็น 1',
     misconceptionTh: 'คิดว่าต้องคูณ a เข้าไปทุก bit เหมือนกันหมด (จริง ๆ คูณเฉพาะ bit ที่เป็น 1)',
-    practiceChallengeTh: 'คำนวณ 7^13 mod 11 ด้วยมือทีละ step แล้วให้ระบบเช็คคำตอบ',
     primaryWidgets: ['StepController', 'CodeSyncPanel', 'BarCompare'],
   },
   'euler-totient': {
     coreConceptTh: 'φ(n) = จำนวน k ใน [1,n] ที่ gcd(k,n)=1',
     misconceptionTh: 'คิดว่า φ(n) ต้อง count 1 ออก (จริง ๆ gcd(1,n)=1 เสมอ นับรวม)',
-    practiceChallengeTh: 'หา φ(36) ด้วยสูตรจาก prime factorization แล้วเทียบกับนับ grid จริง',
     primaryWidgets: ['NumberGrid', 'EquationHighlighter'],
   },
   'fermats-little-theorem': {
     coreConceptTh: 'ถ้า p เป็น prime และ gcd(a,p)=1 แล้ว a^(p−1) mod p = 1 เสมอ',
     misconceptionTh: 'ลืมเงื่อนไข p ต้อง prime และ gcd(a,p)=1',
-    practiceChallengeTh: 'ใช้ Fermat\'s Little Theorem ลัดคำนวณ 3^200 mod 7 โดยไม่คูณตรง ๆ',
     primaryWidgets: ['ClockModulo'],
   },
   'extended-euclidean': {
     coreConceptTh: 'ย้อนรอย (back-substitute) ทุกขั้นตอนของ Euclidean algorithm เพื่อไล่หาสัมประสิทธิ์ x,y',
     misconceptionTh: 'คิดว่า x,y ที่หาได้มีคำตอบเดียว (จริง ๆ มีอนันต์คำตอบ, มีแค่ "particular solution")',
-    practiceChallengeTh: 'หา modular inverse ของ 7 mod 26 โดยใช้ extended Euclidean',
     primaryWidgets: ['StepController', 'CodeSyncPanel'],
   },
   'chinese-remainder-theorem': {
     coreConceptTh: 'ผสาน (combine) x ≡ a1 (mod m1), x ≡ a2 (mod m2), ... เป็นคำตอบเดียว',
     misconceptionTh: 'ใช้ CRT กับ moduli ที่ไม่ coprime กัน (ไม่การันตีคำตอบเดียว)',
-    practiceChallengeTh: 'นับ 2 เหลือ 1, นับ 3 เหลือ 2, นับ 5 เหลือ 4 มีไข่กี่ฟอง (Sun Tzu\'s problem)',
     primaryWidgets: ['ClockModulo', 'StepController'],
   },
   'rsa-cryptography': {
     coreConceptTh: 'Public key encryption จากคุณสมบัติที่ว่า factorization ของเลขจำนวนมากทำได้ยากมาก แต่ modular exponentiation ทำได้เร็ว',
     misconceptionTh: 'คิดว่า e กับ d เลือกอะไรก็ได้ (จริง ๆ ต้องเป็น modular inverse กัน mod φ(n))',
-    practiceChallengeTh: 'ให้ p=5, q=11 คำนวณ n, φ(n), เลือก e, หา d เอง แล้วเข้ารหัส/ถอดรหัสตัวเลข 1 ตัวด้วยมือ',
     primaryWidgets: ['StepController', 'ClockModulo', 'CodeSyncPanel'],
   },
 };

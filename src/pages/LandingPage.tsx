@@ -6,16 +6,33 @@ import styles from './LandingPage.module.css';
 
 export function LandingPage() {
   const navigate = useNavigate();
-  const { completed } = useProgress();
+  const { completed, percentComplete } = useProgress();
 
   return (
-    <div>
+    <div className={styles.page}>
       <section className={styles.hero}>
-        <h1 className={styles.title}>Interactive Number Theory Learning Guide</h1>
-        <p className={styles.subtitle}>เรียนรู้ Number Theory ผ่านการเล่นและลงมือทำ ไม่ใช่แค่อ่านทฤษฎีบท</p>
+        <div className={styles.heroText}>
+          <h1 className={styles.title}>Interactive Number Theory Roadmap</h1>
+          <p className={styles.subtitle}>
+            แผนที่การเรียนรู้ Number Theory แบบ interactive — เลือกหัวข้อจาก roadmap ด้านล่าง เรียนรู้ผ่านการเล่นและลงมือทำ
+            ไม่ใช่แค่อ่านทฤษฎีบท
+          </p>
+        </div>
+        <div className={styles.stats}>
+          <div className={styles.stat}>
+            <div className={styles.statValue}>{completed.size}</div>
+            <div className={styles.statLabel}>/ {TOPIC_ORDER.length} หัวข้อ</div>
+          </div>
+          <div className={styles.stat}>
+            <div className={styles.statValue}>{percentComplete}%</div>
+            <div className={styles.statLabel}>ความคืบหน้า</div>
+          </div>
+        </div>
       </section>
-      <section className={styles.mapSection}>
-        <h2 className={styles.mapHeading}>Course Map</h2>
+
+      <section className={styles.roadmapSection}>
+        <h2 className={styles.roadmapHeading}>Number Theory Roadmap</h2>
+        <p className={styles.roadmapHint}>คลิกที่หัวข้อเพื่อเริ่มเรียน — เส้นเชื่อมแสดงว่าต้องเรียนหัวข้อไหนมาก่อน</p>
         <CourseMapGraph
           topics={TOPIC_ORDER}
           completedIds={completed}

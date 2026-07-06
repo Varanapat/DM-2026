@@ -7,7 +7,7 @@ function App() {
   return (
     <ThemeProvider>
       <ProgressProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <AppRouter />
         </BrowserRouter>
       </ProgressProvider>
