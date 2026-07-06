@@ -8,7 +8,10 @@ export function Header() {
   return (
     <header className={styles.header}>
       <NavLink to="/" className={styles.logo}>
-        DM 2026
+        <span className={styles.logoMark} aria-hidden="true">
+          DM
+        </span>
+        <span className={styles.logoWordmark}>Number Theory</span>
       </NavLink>
       <nav className={styles.nav} aria-label="Main">
         <NavLink
