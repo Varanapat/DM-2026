@@ -1,0 +1,1 @@
+import{o as e}from"./index-sHliBwiu.js";import{t}from"./TopicPageTemplate-BdVUDHtv.js";var n=e();function r(){return(0,n.jsx)(t,{topicId:`rsa-cryptography`})}export{r as RsaCryptographyPage};
