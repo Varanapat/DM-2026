@@ -1,4 +1,4 @@
-export type CellState = 'default' | 'success' | 'danger' | 'muted';
+export type CellState = 'default' | 'success' | 'danger' | 'muted' | 'current';
 
 export interface NumberGridProps {
   max: number;

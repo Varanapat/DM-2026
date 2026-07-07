@@ -11,6 +11,7 @@ export function StepController({
   onStepChange,
   onModeChange,
   disabled,
+  showReset = true,
 }: StepControllerProps) {
   const [speed, setSpeed] = useState(initialSpeed);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -39,17 +40,31 @@ export function StepController({
 
   return (
     <div className={styles.wrapper}>
+      {showReset && (
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() => {
+            onStepChange(0);
+            onModeChange?.('manual');
+          }}
+          disabled={disabled || atStart}
+          aria-label="Reset"
+        >
+          ⏮
+        </button>
+      )}
       <button
         type="button"
         className={styles.button}
         onClick={() => {
-          onStepChange(0);
+          onStepChange(Math.max(currentStep - 1, 0));
           onModeChange?.('manual');
         }}
         disabled={disabled || atStart}
-        aria-label="Reset"
+        aria-label="Previous step"
       >
-        ⏮
+        ◀
       </button>
       <button
         type="button"

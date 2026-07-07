@@ -1,0 +1,1 @@
+export { PredictReveal } from './PredictReveal';
