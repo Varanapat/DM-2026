@@ -1,2 +1,2 @@
 export { NumberGrid } from './NumberGrid';
-export type { NumberGridProps, CellState } from './NumberGrid.types';
+export type { NumberGridProps, CellState, CellDecor } from './NumberGrid.types';

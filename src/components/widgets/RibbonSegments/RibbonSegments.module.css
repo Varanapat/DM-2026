@@ -1,0 +1,59 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.label {
+  width: 88px;
+  flex-shrink: 0;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.track {
+  flex: 1;
+  height: 32px;
+  display: flex;
+  gap: 3px;
+}
+
+.segment {
+  flex: 1;
+  min-width: 4px;
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: 3px;
+  opacity: 0.85;
+}
+
+.segmentAlt {
+  background: var(--color-secondary);
+}
+
+.fineTrack {
+  flex: 1;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-accent) 0,
+    var(--color-accent) calc(100% / var(--seg-count) - 2px),
+    var(--color-bg) calc(100% / var(--seg-count) - 2px),
+    var(--color-bg) calc(100% / var(--seg-count))
+  );
+}
+
+.count {
+  width: 88px;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  text-align: right;
+}

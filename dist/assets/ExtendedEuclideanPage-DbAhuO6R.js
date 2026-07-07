@@ -1,0 +1,1 @@
+import{i as e}from"./index-BMa87t3W.js";import{t}from"./TopicPageTemplate-Cgw_21Uf.js";var n=e();function r(){return(0,n.jsx)(t,{topicId:`extended-euclidean`})}export{r as ExtendedEuclideanPage};

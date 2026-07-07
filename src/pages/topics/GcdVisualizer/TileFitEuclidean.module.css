@@ -1,0 +1,86 @@
+.stage {
+  --tile-blue: #38bdf8;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 100 / 64;
+  overflow: visible;
+  padding: var(--space-3) 0;
+}
+
+.axisLabel {
+  font-family: var(--font-mono);
+  font-size: 3.2px;
+  fill: var(--color-text-muted);
+}
+
+.floor {
+  fill: var(--color-bg-elevated);
+  stroke: var(--color-border);
+  stroke-width: 0.3;
+  filter: drop-shadow(var(--shadow-soft));
+  transition: filter var(--transition-base);
+}
+
+.floorDone {
+  filter: drop-shadow(var(--shadow-soft)) drop-shadow(0 0 3px color-mix(in srgb, var(--color-success) 55%, transparent));
+}
+
+.gridLine {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 0.14;
+}
+
+.tile {
+  filter: drop-shadow(var(--shadow-soft));
+  animation: tileDropIn var(--transition-base) ease-out both;
+  animation-delay: calc(var(--tile-index, 0) * 110ms);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.tileDone {
+  filter: drop-shadow(var(--shadow-soft)) drop-shadow(0 0 2.5px color-mix(in srgb, var(--color-success) 70%, transparent));
+}
+
+@keyframes tileDropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ghost {
+  fill: color-mix(in srgb, var(--color-secondary) 12%, transparent);
+  stroke: var(--color-secondary);
+  stroke-width: 0.5;
+  stroke-dasharray: 1.8 1.2;
+  animation: ghostPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes ghostPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.ghostLabel {
+  font-family: var(--font-mono);
+  font-size: 3.2px;
+  font-weight: 700;
+  fill: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost {
+    animation: none;
+  }
+}

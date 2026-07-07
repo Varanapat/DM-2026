@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { RootLayout } from '@/layouts/RootLayout';
 import { TopicLayout } from '@/layouts/TopicLayout';
@@ -19,7 +20,17 @@ export function AppRouter() {
       <Route element={<TopicLayout />}>
         {TOPIC_ORDER.map((topic) => {
           const PageComponent = TOPIC_PAGE_COMPONENTS[topic.id];
-          return <Route key={topic.id} path={topic.path} element={<PageComponent />} />;
+          return (
+            <Route
+              key={topic.id}
+              path={topic.path}
+              element={
+                <Suspense fallback={null}>
+                  <PageComponent />
+                </Suspense>
+              }
+            />
+          );
         })}
       </Route>
       <Route path="*" element={<NotFoundPage />} />
