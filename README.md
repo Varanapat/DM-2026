@@ -1,112 +1,32 @@
-# Interactive Number Theory Learning Guide
+# React + TypeScript + Vite
 
-> https://varanapat.github.io/DM-2026/
-> 
-> An interactive, hands-on Number Theory course for students — explore the roadmap, learn by doing, not just by reading.
-> เอกสารนี้อธิบายจุดประสงค์ โครงสร้าง และวิธีใช้เนื้อหาการเรียนรู้ของเว็บไซต์นี้ 
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
----
+Currently, two official plugins are available:
 
-## 1. จุดประสงค์ของเว็บไซต์
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-เว็บไซต์นี้สร้างขึ้นเพื่อสอน **Number Theory** ให้นักศึกษา "รู้สึก" และ "เล่น" กับคณิตศาสตร์ แทนที่จะท่องจำทฤษฎีบทเฉย ๆ
+## React Compiler
 
-แนวคิดหลัก:
-- **Show, don't tell** — ทุก concept มีภาพ/แผนภาพ interactive ก่อนเจอสูตร
-- **Manipulable first** — ลงมือกด ลาก หรือใส่ค่าเองก่อนอ่านทฤษฎี
-- **Fail safely, learn fast** — ตอบผิดไม่โดนตำหนิ ได้ hint ทันที
-- **Progressive disclosure** — เริ่มจากสัญชาตญาณ → ตัวอย่างตัวเลข → สูตรทั่วไป → พิสูจน์ (ซ่อนไว้ให้คนที่อยากรู้ลึก)
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-เหมาะสำหรับนักศึกษาที่กำลังเรียน Discrete Math / Number Theory เป็นครั้งแรก และอยากมีที่ฝึกฝนควบคู่กับการเรียนในห้อง
+## Expanding the Oxlint configuration
 
----
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
 
-## 2. โครงสร้างเว็บไซต์
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
+```
 
-### หน้าแรก — Roadmap
-หน้าแรก (`/`) แสดง **แผนที่การเรียนรู้ (roadmap)** สไตล์เดียวกับ [roadmap.sh](https://roadmap.sh) — โหนดแต่ละอันคือหนึ่งหัวข้อ เส้นเชื่อมแสดงว่าต้องเรียนหัวข้อไหนมาก่อน ยิ่งเรียนลึกยิ่งอยู่ด้านล่าง (topic ที่ต้องพื้นฐานเยอะ เช่น RSA จะอยู่ล่างสุดเพราะรวมทุกอย่างที่เรียนมา)
-
-สีของโหนดบอกสถานะ:
-- 🟩 **เรียนแล้ว** — มีกรอบสีเขียว/teal พร้อมเครื่องหมาย ✓
-- 🟧 **แนะนำให้เรียนต่อ** — หัวข้อถัดไปที่ปลดล็อกแล้วและยังไม่เรียน (กรอบสีส้ม)
-- ⬜ **เรียนได้แล้ว** — ปลดล็อกแล้วแต่ยังไม่ใช่หัวข้อแนะนำลำดับถัดไป
-- 🔒 **ยังไม่ปลดล็อก** — ยังเรียนหัวข้อก่อนหน้าไม่ครบ (โหนดจาง ๆ)
-
-คลิกโหนดไหนก็ไปหน้าหัวข้อนั้นได้ทันที ไม่บังคับเรียงลำดับ
-
-### หัวข้อทั้งหมด (14 หัวข้อ + Capstone)
-
-ลำดับการเรียนที่แนะนำ (ตาม dependency):
-
-1. Divisibility (การหารลงตัว)
-2. Prime Numbers (จำนวนเฉพาะ)
-3. Sieve of Eratosthenes
-4. GCD — Euclidean Algorithm
-5. LCM
-6. Prime Factorization
-7. Modular Arithmetic
-8. Congruence
-9. Fast Modular Exponentiation
-10. Euler's Totient Function φ(n)
-11. Fermat's Little Theorem
-12. Extended Euclidean Algorithm
-13. Chinese Remainder Theorem (CRT)
-14. **RSA Cryptography** — Capstone ที่รวมทุกหัวข้อก่อนหน้าเข้าด้วยกัน
-
-บวกอีก 2 หน้าที่ไม่ผูกกับหัวข้อใดหัวข้อหนึ่ง:
-- `/playground` — สนามเด็กเล่นรวม widget ทุกตัว ใส่เลขเองได้อิสระ ไม่ผูกกับบทเรียนไหน
-- `/glossary` — รวมคำศัพท์สำคัญพร้อมคำอธิบายสั้น ๆ
-
-### โครงสร้างในแต่ละหน้าหัวข้อ
-
-ทุกหน้าหัวข้อใช้ template เดียวกัน 7 ส่วน เพื่อให้คุ้นเคยและคาดเดาได้ว่าจะเจออะไรต่อไป:
-
-| ลำดับ | ส่วน | สิ่งที่ได้ |
-|---|---|---|
-| 1 | **จุดเริ่มต้น (Hook)** | คำถามกวนใจ/ปริศนาสั้น ๆ ก่อนอธิบายอะไรเลย |
-| 2 | **ภาพอธิบาย (Visual Explanation)** | แนวคิดหลัก + diagram/widget interactive |
-| 3 | **ลองเอง (Try It Yourself)** | ใส่ค่าตัวเลขเอง ดูผลลัพธ์แบบ real-time |
-| 4 | **ทีละขั้นตอน (Step-by-step Walkthrough)** | algorithm พร้อมปุ่มเดินหน้า/ถอยหลังทีละ step |
-| 5 | **เข้าใจผิดบ่อย (Common Misconceptions)** | การ์ดเทียบ "ผิดที่คนเข้าใจกันบ่อย" กับคำตอบที่ถูก |
-| 6 | **แบบทดสอบ (Quiz)** | คำถามสั้น ๆ พร้อมเฉลยและคำอธิบายทันที |
-| 7 | **โจทย์ฝึกฝน (Practice Challenge)** | โจทย์ 4 ระดับความยาก (ดูหัวข้อ 3 ด้านล่าง) |
-
-ด้านซ้ายของหน้า (บนจอคอมพิวเตอร์) มีแถบเมนูย่อยแบบ fixed ที่ติดขอบซ้ายจอเสมอ ใช้กระโดดไปยังส่วนที่ต้องการโดยไม่ต้อง scroll หาเอง — บนมือถือจะกลายเป็นปุ่ม "สารบัญหัวข้อย่อย" ด้านล่างจอแทน
-
-ด้านบนสุดของทุกหน้าหัวข้อมี progress bar รวม + ปุ่ม "ทำเครื่องหมายว่าเรียนแล้ว" และด้านล่างสุดมีลิงก์ไป "หัวข้อก่อนหน้า / หัวข้อถัดไป" ตามลำดับการเรียนที่แนะนำ
-
----
-
-## 3. วิธีใช้เนื้อหาการเรียนรู้
-
-### แนะนำลำดับการเรียน
-เริ่มจากหน้าแรก คลิกโหนดที่มีกรอบสีส้ม (แนะนำให้เรียนต่อ) ไปเรื่อย ๆ — ระบบจะจำว่าเรียนหัวข้อไหนแล้วบ้าง (เก็บไว้ในเบราว์เซอร์ ไม่ต้อง login) ไม่จำเป็นต้องเรียงตามลำดับเป๊ะ ๆ ถ้าอยากข้ามไปดูหัวข้อที่สนใจก่อนก็คลิกโหนดนั้นได้เลย แต่ถ้าโหนดยังจาง ๆ (ล็อกอยู่) แนะนำให้เรียนพื้นฐานก่อน เพราะเนื้อหาจะอ้างอิงกับหัวข้อก่อนหน้า
-
-### วิธีเรียนในแต่ละหน้า
-1. อ่านคำถามใน "จุดเริ่มต้น" ก่อน แล้วลองเดาคำตอบในใจก่อนเลื่อนลงไปดูคำอธิบาย
-2. เล่นกับ widget ใน "ภาพอธิบาย" และ "ลองเอง" ด้วยค่าตัวเลขของตัวเอง ไม่ใช่แค่ดูตัวอย่างที่ให้มา
-3. ใน "ทีละขั้นตอน" ลองกดเดินหน้าทีละ step แล้วทายว่า step ถัดไปจะเกิดอะไรขึ้น ก่อนกดดูจริง
-4. อ่าน "เข้าใจผิดบ่อย" เสมอ แม้จะรู้สึกว่าเข้าใจหัวข้อนั้นดีแล้วก็ตาม เพราะเป็นจุดที่นักศึกษาพลาดกันบ่อยที่สุด
-5. ทำ "แบบทดสอบ" เพื่อเช็คความเข้าใจแบบเร็ว ๆ ก่อนไปทำโจทย์จริง
-
-### โจทย์ฝึกฝน 4 ระดับ
-แต่ละหัวข้อมีโจทย์ 4 ข้อ ไล่ระดับความยาก:
-- 🟢 **ง่าย** — ใช้สูตร/นิยามตรง ๆ เช็คว่าเข้าใจ concept พื้นฐาน
-- 🔵 **ปานกลาง** — ต้องคิดหลายขั้นตอน หรือใช้ตัวเลขที่ใหญ่ขึ้น
-- 🟠 **ยาก** — เชื่อมโยงหลาย concept เข้าด้วยกัน หรือต้องหาตัวอย่างค้าน/พิสูจน์แบบง่าย ๆ
-- 💡 **โจทย์เปิดกว้าง** — ไม่มีคำตอบตายตัว เน้นให้อธิบายด้วยคำพูดตัวเอง คิดต่อยอด หรือเชื่อมโยงกับหัวข้ออื่น (เช่น เชื่อมโยงไป RSA) เหมาะสำหรับคนที่อยากเข้าใจลึกกว่าการทำโจทย์ทั่วไป
-
-แนะนำให้ทำให้ครบทั้ง 4 ข้อ ไม่ใช่แค่ข้อ "ง่าย" — โดยเฉพาะโจทย์เปิดกว้างที่ช่วยฝึกอธิบายความคิดตัวเอง ซึ่งเป็นทักษะสำคัญพอ ๆ กับการคำนวณ
-
-### Playground และ Glossary
-ถ้าจำสูตรหรือนิยามไม่ได้ระหว่างเรียน ไปที่ `/glossary` เพื่อดูคำอธิบายสั้น ๆ ได้ทันที และถ้าอยากทดลองกับ widget อิสระโดยไม่ผูกกับบทเรียนไหน (เช่น อยากลองนาฬิกา mod หรือต้นไม้แยกตัวประกอบกับเลขที่ตัวเองสนใจ) ไปที่ `/playground`
-
----
-
-## 4. สถานะปัจจุบันของเนื้อหา
-
-เว็บไซต์นี้กำลังพัฒนาเป็น 2 phase:
-- **Phase 1 (ปัจจุบัน)** — โครงสร้างเว็บไซต์ครบทุกหน้า, roadmap, quiz และโจทย์ฝึกฝนครบทุกหัวข้อ, แต่ widget แบบ interactive เต็มรูปแบบ (เช่น animation ของ Euclidean algorithm, D3 factor tree) ยังเป็น placeholder อยู่บางส่วน
-- **Phase 2 (ถัดไป)** — ใส่ logic จริงให้ widget ทุกตัว เริ่มจาก GCD — Euclidean Algorithm เป็นต้นแบบ แล้วขยายไปหัวข้ออื่น
-
-หากเจอส่วนที่ยังเป็นกล่องประ ๆ เขียนว่า "Widget ตัวนี้จะทำงานจริงใน Phase 2" แปลว่าเนื้อหา/โจทย์ในหน้านั้นใช้เรียนได้ปกติ แต่ภาพ interactive ประกอบยังไม่เสร็จ
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.

@@ -15,9 +15,12 @@
 }
 
 .link {
+  width: 100%;
+  text-align: left;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
   font-size: var(--fs-sm);
+  font-weight: 500;
   color: var(--color-text-muted);
   min-height: var(--touch-target-min);
   display: flex;
@@ -28,4 +31,15 @@
 .link:hover {
   background: var(--color-border);
   color: var(--color-text);
+}
+
+.linkActive {
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.linkActive:hover {
+  background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  color: var(--color-accent);
 }

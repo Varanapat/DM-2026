@@ -1,7 +1,7 @@
 .hook {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
   padding: var(--space-4);
   background: var(--color-bg-elevated);
   border-radius: var(--radius-lg);
@@ -13,31 +13,171 @@
   font-size: var(--fs-sm);
 }
 
-.visual {
+.plainBars {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: var(--space-2);
+  margin: var(--space-2) 0;
+}
+
+.plainBarLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+
+.plainBarTrack {
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  opacity: 0.85;
+}
+
+.plainBarTrackAlt {
+  background: var(--color-secondary);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: stretch;
+  width: 100%;
+}
+
+.inputsRow {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-3);
 }
 
-.tryIt {
+.phaseBlock {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
 }
 
-.resultLine {
-  font-size: var(--fs-lg);
+.phaseHeading {
+  font-weight: 700;
 }
 
-.raceCaption {
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.compareRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.compareLabel {
+  width: 110px;
+  flex-shrink: 0;
   font-size: var(--fs-sm);
   color: var(--color-text-muted);
 }
 
-.walkthrough {
+.chip {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-border);
+  transition: background-color var(--transition-fast), opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.chip_default {
+  background: var(--color-border);
+  opacity: 0.5;
+}
+
+.chip_success {
+  background: color-mix(in srgb, var(--color-success) 25%, transparent);
+  color: var(--color-success);
+  font-weight: 700;
+  animation: chipPop var(--transition-base) ease-out;
+}
+
+.chip_muted {
+  opacity: 0.35;
+}
+
+.chip_current {
+  background: var(--color-bg-elevated);
+  outline: 2px solid var(--color-secondary);
+  color: var(--color-secondary-contrast);
+  font-weight: 700;
+  transform: scale(1.15);
+}
+
+.chip_danger {
+  opacity: 0.35;
+}
+
+@keyframes chipPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.crownBlock {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--color-border);
+  min-height: 88px;
+}
+
+.crownBlockActive {
+  border: none;
+  background: color-mix(in srgb, var(--color-secondary) 16%, var(--color-bg-elevated));
+  box-shadow: 0 0 24px color-mix(in srgb, var(--color-secondary) 40%, transparent);
+  animation: crownIn var(--transition-base) ease-out;
+}
+
+.crownIcon {
+  font-size: 2.5rem;
+}
+
+.crownValue {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+@keyframes crownIn {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

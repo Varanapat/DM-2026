@@ -42,3 +42,14 @@ export function gcdSteps(a: number, b: number): EuclideanStep[] {
 export function naiveDivisorCheckCount(a: number, b: number): number {
   return Math.max(Math.min(Math.abs(a), Math.abs(b)), 1);
 }
+
+/** All positive divisors of n, ascending — used for the "list every divisor"
+ * naive-method illustration (only meant for small teaching examples). */
+export function divisors(n: number): number[] {
+  const abs = Math.max(Math.abs(Math.trunc(n)), 1);
+  const result: number[] = [];
+  for (let i = 1; i <= abs; i++) {
+    if (abs % i === 0) result.push(i);
+  }
+  return result;
+}

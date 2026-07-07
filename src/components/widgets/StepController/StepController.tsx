@@ -54,6 +54,18 @@ export function StepController({
       <button
         type="button"
         className={styles.button}
+        onClick={() => {
+          onStepChange(Math.max(currentStep - 1, 0));
+          onModeChange?.('manual');
+        }}
+        disabled={disabled || atStart}
+        aria-label="Previous step"
+      >
+        ◀
+      </button>
+      <button
+        type="button"
+        className={styles.button}
         onClick={() => onModeChange?.(mode === 'auto' ? 'manual' : 'auto')}
         disabled={disabled || (atEnd && mode !== 'auto')}
         aria-label={mode === 'auto' ? 'Pause' : 'Play'}
