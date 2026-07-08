@@ -1,0 +1,184 @@
+.headerRow {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.numberInput {
+  width: 76px;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.randomBtn {
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: transform var(--transition-fast);
+}
+
+.randomBtn:hover {
+  transform: translateY(-1px);
+}
+
+.guessRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.guessLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.guessBtn {
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--color-border);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.guessBtnActive {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.guessResultRight {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.guessResultWrong {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-danger);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.arrangementLabel {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.stage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 100 / 56;
+  overflow: visible;
+}
+
+.dot {
+  fill: var(--color-accent);
+  filter: drop-shadow(var(--shadow-soft));
+  transition: transform var(--transition-base) ease-out, fill var(--transition-base);
+}
+
+.dotOverflow {
+  fill: var(--color-danger);
+  animation: overflowPulse 1.2s ease-in-out infinite;
+}
+
+.dotGold {
+  fill: var(--color-secondary);
+}
+
+@keyframes overflowPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.galleryTitle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.galleryRow {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.galleryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  animation: galleryIn var(--transition-base) ease-out;
+}
+
+.galleryRect {
+  background: color-mix(in srgb, var(--color-success) 30%, transparent);
+  border: 1.5px solid var(--color-success);
+  border-radius: var(--radius-sm);
+}
+
+.galleryLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+@keyframes galleryIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dotOverflow {
+    animation: none;
+  }
+}

@@ -1,0 +1,219 @@
+.inputsRow {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.numberInput {
+  width: 80px;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.tableCard,
+.backCard,
+.tryCard {
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.backCard {
+  animation: cardIn var(--transition-base) ease-out;
+}
+
+.tryCard {
+  animation: cardIn var(--transition-base) ease-out;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tableTitle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.tableHint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.forwardTable {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.forwardRow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  animation: rowIn var(--transition-fast) ease-out both;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.forwardRowSource {
+  background: color-mix(in srgb, #a78bfa 16%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, #a78bfa 35%, transparent);
+}
+
+.gcdMark {
+  color: var(--color-secondary-contrast);
+  background: color-mix(in srgb, var(--color-secondary) 55%, transparent);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.backStack {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-1);
+}
+
+.backRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  opacity: 0.65;
+  animation: rowIn var(--transition-base) ease-out both;
+  transition: opacity var(--transition-fast), background-color var(--transition-fast);
+}
+
+.backRowActive {
+  opacity: 1;
+  background: color-mix(in srgb, #a78bfa 14%, transparent);
+  font-weight: 600;
+}
+
+.backArrow {
+  color: #a78bfa;
+  font-weight: 700;
+}
+
+.backEq {
+  flex: 1;
+  min-width: 0;
+}
+
+.coefX {
+  color: #38bdf8;
+}
+
+.coefY {
+  color: var(--color-secondary);
+}
+
+.trackerRow {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.trackerChip {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  padding: 2px var(--space-3);
+  border-radius: 999px;
+  background: color-mix(in srgb, #a78bfa 18%, transparent);
+  transition: transform var(--transition-fast);
+}
+
+.trackerFor {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.tryRow {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.tryEq {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+}
+
+.tryInput {
+  width: 72px;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  font-family: var(--font-mono);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.tryOk {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.tryNo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-danger);
+}

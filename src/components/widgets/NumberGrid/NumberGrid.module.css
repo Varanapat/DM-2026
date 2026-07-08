@@ -4,7 +4,13 @@
   gap: var(--space-1);
 }
 
+.gridCompact {
+  grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+  gap: 3px;
+}
+
 .cell {
+  position: relative;
   min-width: var(--touch-target-min);
   min-height: var(--touch-target-min);
   border-radius: var(--radius-sm);
@@ -15,6 +21,22 @@
   justify-content: center;
   background: var(--color-border);
   transition: background-color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.gridCompact .cell {
+  min-width: 32px;
+  min-height: 32px;
+  font-size: 12px;
+}
+
+.annotation {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55%;
+  height: 3px;
+  border-radius: 2px;
 }
 
 .cell:hover:not(:disabled) {
@@ -29,6 +51,7 @@
 .success {
   background: color-mix(in srgb, var(--color-success) 25%, transparent);
   color: var(--color-success);
+  animation: popScale var(--transition-base) ease-out;
 }
 
 .danger {
@@ -38,5 +61,64 @@
 }
 
 .muted {
-  opacity: 0.35;
+  opacity: 0.4;
+  transition: opacity var(--transition-base);
+}
+
+.current {
+  position: relative;
+  z-index: 2;
+  background: var(--color-bg-elevated);
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 1px;
+  color: var(--color-secondary-contrast);
+  font-weight: 700;
+  transform: scale(1.15);
+}
+
+.crossed {
+  opacity: 0.45;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  animation: crossIn var(--transition-base) ease-out both;
+  animation-delay: calc(var(--cell-index, 0) * 60ms);
+}
+
+.gold {
+  background: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+  color: var(--color-secondary-contrast);
+  font-weight: 700;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--color-secondary) 45%, transparent);
+  animation: popScale var(--transition-base) ease-out;
+  animation-delay: calc(var(--cell-index, 0) * 20ms);
+  animation-fill-mode: both;
+}
+
+.fallen {
+  opacity: 0.18;
+  transform: translateY(4px) scale(0.9);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+@keyframes crossIn {
+  from {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+}
+
+@keyframes popScale {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

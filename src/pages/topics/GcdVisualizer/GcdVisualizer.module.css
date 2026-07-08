@@ -1,0 +1,278 @@
+/* gcd color aliases used throughout the method-1 styles below */
+.canvas,
+.methodToggle,
+.inputsRow {
+  --gcd-blue: #38bdf8;
+  --gcd-blue-contrast: #ffffff;
+  --gcd-orange: var(--color-secondary);
+  --gcd-green: var(--color-success);
+}
+
+.methodToggle {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--color-border);
+  gap: 2px;
+}
+
+.methodToggleBtn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  min-height: var(--touch-target-min);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.methodToggleBtnActive {
+  background: var(--gcd-blue);
+  color: var(--gcd-blue-contrast);
+}
+
+.inputsRow {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.numberInputGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.numberInput {
+  width: 76px;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  text-align: center;
+  color: var(--color-text);
+}
+
+/* ---------- Shared canvas bits ---------- */
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.timelineWrapper {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  transform: translate(-50%, -115%);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 5;
+  animation: fadeIn var(--transition-fast) ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.timelineLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+/* ---------- Method 1: pools ---------- */
+
+.poolsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.poolBox {
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 80px;
+}
+
+.poolBoxBlue {
+  border-color: var(--gcd-blue);
+}
+
+.poolBoxOrange {
+  border-color: var(--gcd-orange);
+}
+
+.poolTitle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.chip {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-border);
+  transition: transform var(--transition-fast);
+}
+
+.chipBlue {
+  background: color-mix(in srgb, var(--gcd-blue) 25%, transparent);
+  color: var(--gcd-blue);
+  font-weight: 700;
+  animation: chipPop var(--transition-base) ease-out;
+}
+
+.chipOrange {
+  background: color-mix(in srgb, var(--gcd-orange) 30%, transparent);
+  color: var(--gcd-orange);
+  font-weight: 700;
+  animation: chipPop var(--transition-base) ease-out;
+}
+
+.chipGreen {
+  background: color-mix(in srgb, var(--gcd-green) 28%, transparent);
+  color: var(--gcd-green);
+  font-weight: 700;
+  animation: chipPop var(--transition-base) ease-out;
+}
+
+.chipDefault {
+  opacity: 0.4;
+}
+
+.chipMuted {
+  opacity: 0.3;
+}
+
+.chipCurrent {
+  outline: 2px solid var(--gcd-orange);
+  background: var(--color-bg-elevated);
+  font-weight: 700;
+  transform: scale(1.15);
+}
+
+@keyframes chipPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---------- Climax panel ---------- */
+
+.climaxPanel {
+  width: 100%;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 96px;
+  justify-content: center;
+}
+
+.climaxPanelReady {
+  border-color: var(--gcd-green);
+}
+
+.climaxPanelDone {
+  border-color: var(--gcd-green);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--gcd-green) 45%, transparent);
+  animation: climaxIn var(--transition-base) ease-out;
+}
+
+.climaxTitle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--gcd-green);
+}
+
+.winnerChip {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--gcd-green);
+  transform: scale(1.5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.crownIcon {
+  font-size: 1.6rem;
+}
+
+.winnerBadge {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--gcd-green);
+  background: color-mix(in srgb, var(--gcd-green) 18%, transparent);
+  padding: 2px var(--space-3);
+  border-radius: 999px;
+}
+
+@keyframes climaxIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .poolsRow {
+    grid-template-columns: 1fr;
+  }
+}

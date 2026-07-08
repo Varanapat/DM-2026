@@ -1,0 +1,192 @@
+.headerRow {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.numberInput {
+  width: 84px;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.randomBtn {
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: transform var(--transition-fast);
+}
+
+.randomBtn:hover {
+  transform: translateY(-1px);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.treesRow {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.treeBlock {
+  flex: 1;
+  min-width: min(320px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.treeCaption {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.stage {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.edge {
+  stroke: var(--color-border);
+  stroke-width: 0.7;
+  animation: edgeIn var(--transition-base) ease-out both;
+}
+
+@keyframes edgeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.node {
+  filter: drop-shadow(var(--shadow-soft));
+  animation: nodeIn var(--transition-base) ease-out both;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: fill var(--transition-base);
+}
+
+.nodeGold {
+  fill: color-mix(in srgb, var(--color-secondary) 75%, transparent);
+}
+
+.nodeComposite {
+  fill: var(--color-bg-elevated);
+  stroke: var(--color-accent);
+  stroke-width: 0.7;
+  stroke-dasharray: 2 1.2;
+}
+
+.nodeInner {
+  fill: var(--color-bg-elevated);
+  stroke: var(--color-border);
+  stroke-width: 0.5;
+  opacity: 0.75;
+}
+
+.nodeClickable {
+  cursor: pointer;
+}
+
+.nodeClickable:hover .node {
+  stroke-width: 1.2;
+}
+
+@keyframes nodeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.nodeText {
+  font-family: var(--font-mono);
+  font-size: 4.2px;
+  font-weight: 700;
+  fill: var(--color-text);
+  pointer-events: none;
+}
+
+.nodeTextGold {
+  fill: #2a2724;
+}
+
+.formulaBar {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  animation: edgeIn var(--transition-base) ease-out;
+}
+
+.formulaChip {
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-secondary-contrast);
+  background: color-mix(in srgb, var(--color-secondary) 45%, transparent);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  animation: chipFly var(--transition-base) ease-out both;
+  animation-delay: calc(var(--chip-index, 0) * 150ms);
+}
+
+.formulaEquals {
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+}
+
+@keyframes chipFly {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

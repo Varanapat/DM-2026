@@ -1,0 +1,58 @@
+.controls {
+  width: min(360px, 100%);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.predictAnswer {
+  font-size: var(--fs-sm);
+}
+
+.counterRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.counter {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.counter strong {
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  color: var(--color-success);
+}
+
+.counterHint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.formulaBox {
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+  animation: formulaIn var(--transition-base) ease-out;
+}
+
+@keyframes formulaIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

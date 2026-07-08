@@ -1,0 +1,119 @@
+.inputsRow {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.numberInput {
+  width: 76px;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+.tray {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), 28px);
+  gap: 6px;
+  justify-content: center;
+  padding: var(--space-3);
+}
+
+.dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  transition: background-color var(--transition-base), opacity var(--transition-base);
+}
+
+.dotPending {
+  background: var(--color-border);
+  opacity: 0.5;
+}
+
+.dotFilled {
+  background: var(--color-accent);
+  box-shadow: var(--shadow-soft);
+  animation: dotIn var(--transition-base) ease-out both;
+  animation-delay: calc(var(--dot-index, 0) * 70ms);
+}
+
+.dotLeftover {
+  background: var(--color-danger);
+  box-shadow: var(--shadow-soft);
+  animation: dotShake calc(var(--transition-base) * 2) ease-in-out both;
+  animation-delay: calc(var(--dot-index, 0) * 70ms);
+}
+
+@keyframes dotIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dotShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+}
+
+.verdictText {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-danger);
+}
+
+.gridSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gridLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dotLeftover {
+    animation: none;
+  }
+}

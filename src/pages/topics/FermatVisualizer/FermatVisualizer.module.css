@@ -1,0 +1,209 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.chipRow {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.chipLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-right: var(--space-1);
+}
+
+.chipBtn {
+  min-width: 40px;
+  min-height: 36px;
+  padding: 0 var(--space-2);
+  border-radius: 999px;
+  background: var(--color-border);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.chipBtnActive {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.breakBtn {
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  border-radius: 999px;
+  border: 1.5px dashed var(--color-danger);
+  color: var(--color-danger);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  margin-left: var(--space-2);
+  transition: background-color var(--transition-fast);
+}
+
+.breakBtnActive {
+  background: color-mix(in srgb, var(--color-danger) 14%, transparent);
+}
+
+.guessRight {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.guessWrong {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-danger);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.clock {
+  width: min(320px, 80vw);
+  height: auto;
+  overflow: visible;
+}
+
+.face {
+  fill: var(--color-bg-elevated);
+  stroke: var(--color-border);
+  stroke-width: 1;
+  filter: drop-shadow(var(--shadow-soft));
+}
+
+.targetRing {
+  fill: none;
+  stroke: var(--color-secondary);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 2;
+  animation: ringPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.hopArc {
+  fill: none;
+  stroke: #38bdf8;
+  stroke-width: 1.6;
+  opacity: 0.55;
+  stroke-linecap: round;
+  animation: arcDraw var(--transition-base) ease-out both;
+}
+
+@keyframes arcDraw {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.55;
+  }
+}
+
+.token {
+  fill: color-mix(in srgb, #38bdf8 40%, transparent);
+  stroke: #38bdf8;
+  stroke-width: 1.5;
+  transition: cx var(--transition-base), cy var(--transition-base);
+}
+
+.tokenDone {
+  fill: color-mix(in srgb, var(--color-success) 40%, transparent);
+  stroke: var(--color-success);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-success) 65%, transparent));
+}
+
+.tickLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--color-text-muted);
+}
+
+.tickLabelToken {
+  fill: var(--color-text);
+  font-weight: 700;
+}
+
+.readout {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.readout strong {
+  font-size: var(--fs-lg);
+  color: var(--color-text);
+}
+
+.expTable {
+  width: min(420px, 100%);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.expTitle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.expGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: var(--space-1) var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.expHead {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.expRow {
+  display: contents;
+}
+
+.expOne {
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.expNotOne {
+  color: var(--color-danger);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .targetRing {
+    animation: none;
+  }
+}

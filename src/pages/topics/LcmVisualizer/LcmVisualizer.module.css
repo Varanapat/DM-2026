@@ -1,0 +1,150 @@
+.inputsRow {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.numberInput {
+  width: 76px;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.predictAnswer {
+  font-size: var(--fs-sm);
+}
+
+.stage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 100 / 34;
+  overflow: visible;
+}
+
+.lineLabel {
+  font-family: var(--font-mono);
+  font-size: 3px;
+  fill: var(--color-text-muted);
+}
+
+.track {
+  stroke: var(--color-border);
+  stroke-width: 0.5;
+}
+
+.dot {
+  filter: drop-shadow(var(--shadow-soft));
+  animation: dotPop var(--transition-base) ease-out both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.dotA {
+  fill: #38bdf8;
+}
+
+.dotB {
+  fill: var(--color-secondary);
+}
+
+.dotShared {
+  fill: var(--color-success);
+  animation: sharedPop calc(var(--transition-base) * 1.5) ease-out both;
+}
+
+@keyframes dotPop {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sharedPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  60% {
+    transform: scale(1.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.connector {
+  stroke: var(--color-success);
+  stroke-width: 0.7;
+  stroke-dasharray: 1.4 1;
+  animation: dotPop var(--transition-base) ease-out both;
+}
+
+.crown {
+  font-size: 5px;
+  animation: sharedPop calc(var(--transition-base) * 1.5) ease-out both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.dotLabel {
+  font-family: var(--font-mono);
+  font-size: 2.6px;
+  fill: var(--color-text-muted);
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  animation: identityIn var(--transition-base) ease-out;
+}
+
+.identityTitle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+@keyframes identityIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
