@@ -1,0 +1,1 @@
+function e(e){let t=Math.abs(Math.trunc(e));if(t<2)return t;if(t%2==0)return 2;for(let e=3;e*e<=t;e+=2)if(t%e===0)return e;return t}function t(t){let n=Math.trunc(t);return n>=2&&e(n)===n}function n(t){let n=Math.abs(Math.trunc(t)),r=[];for(;n>1;){let t=e(n),i=0;for(;n%t===0;)n/=t,i++;r.push({prime:t,exponent:i})}return r}export{n,e as r,t};
