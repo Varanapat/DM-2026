@@ -1,0 +1,268 @@
+.inputsRow {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.numberInput {
+  width: 72px;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+/* ---------- bit strip ---------- */
+
+.bitStrip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.bitStripLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.bitStripBinary {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.bitRow {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.bitChip {
+  width: 36px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  box-shadow: var(--shadow-soft);
+  animation: bitFlip var(--transition-base) ease-out both;
+  animation-delay: calc(var(--bit-index, 0) * 90ms);
+  transition: transform var(--transition-fast), opacity var(--transition-fast), outline-color var(--transition-fast);
+}
+
+.bitHidden {
+  opacity: 0;
+  animation: none;
+}
+
+.bitOne {
+  background: color-mix(in srgb, var(--color-success) 25%, transparent);
+  color: var(--color-success);
+}
+
+.bitZero {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-muted);
+}
+
+.bitPending {
+  opacity: 0.4;
+}
+
+.bitActive {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 1px;
+  transform: scale(1.18);
+}
+
+@keyframes bitFlip {
+  from {
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+}
+
+/* ---------- registers + code ---------- */
+
+.machineRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+@media (min-width: 641px) {
+  .machineRow {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+}
+
+.registers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  min-width: 88px;
+  transition: box-shadow var(--transition-base);
+}
+
+.registerActive {
+  box-shadow: 0 0 14px color-mix(in srgb, var(--color-secondary) 40%, transparent);
+}
+
+.registerLabel {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.registerValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  transition: color var(--transition-fast);
+}
+
+.registerValueDone {
+  color: var(--color-success);
+}
+
+.arrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+
+.arrowFire {
+  color: var(--color-success);
+  font-weight: 700;
+  animation: arrowPulse var(--transition-base) ease-out;
+}
+
+.arrowIdle {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+@keyframes arrowPulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------- accumulated bit table ---------- */
+
+.bitTable {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 64px;
+  gap: var(--space-1) var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  align-items: center;
+}
+
+.bitTableHead {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.bitTableRow {
+  display: contents;
+}
+
+.bitCellOne {
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.bitCellZero {
+  color: var(--color-text-muted);
+}
+
+.bitCellResult {
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ---------- race ---------- */
+
+.race {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  animation: raceIn var(--transition-base) ease-out;
+}
+
+.raceTitle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+@keyframes raceIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

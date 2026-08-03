@@ -1,0 +1,123 @@
+.controls {
+  width: min(360px, 100%);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.hintLine {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.buckets {
+  display: grid;
+  grid-template-columns: repeat(var(--bucket-count, 4), minmax(0, 1fr));
+  gap: var(--space-2);
+  align-items: start;
+}
+
+.bucket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  min-height: 120px;
+}
+
+.bucketLabel {
+  min-width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #1c1a18;
+}
+
+.bucketStack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  align-items: center;
+}
+
+.chip {
+  width: 100%;
+  max-width: 44px;
+  min-height: 28px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--chip-color) 28%, transparent);
+  color: var(--color-text);
+  animation: chipFlyIn var(--transition-base) ease-out both;
+  animation-delay: calc(var(--chip-index, 0) * 90ms);
+  transition: transform var(--transition-fast), outline-color var(--transition-fast);
+}
+
+.chip:hover {
+  transform: scale(1.1);
+}
+
+.chipRaised {
+  transform: translateY(-6px) scale(1.15);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--chip-color) 55%, transparent);
+}
+
+.chipSelected {
+  outline: 2.5px solid var(--color-secondary);
+  outline-offset: 1px;
+  transform: scale(1.1);
+}
+
+@keyframes chipFlyIn {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pairResult {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  animation: chipFlyIn var(--transition-fast) ease-out;
+}
+
+.pairResultOk {
+  color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 14%, transparent);
+}
+
+.pairResultNo {
+  color: var(--color-danger);
+  background: color-mix(in srgb, var(--color-danger) 12%, transparent);
+}
+
+@media (max-width: 640px) {
+  .buckets {
+    gap: 4px;
+  }
+}

@@ -1,0 +1,298 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.chipRow {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.chipLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin: 0 var(--space-1);
+}
+
+.chipBtn {
+  min-width: 40px;
+  min-height: 36px;
+  padding: 0 var(--space-2);
+  border-radius: 999px;
+  background: var(--color-border);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.chipBtn:disabled {
+  opacity: 0.35;
+}
+
+.chipBtnActive {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.numberInput {
+  width: 72px;
+  min-height: 38px;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+/* ---------- key-gen pipeline ---------- */
+
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-2);
+}
+
+.station {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  opacity: 0.4;
+  transition: opacity var(--transition-base), box-shadow var(--transition-base);
+}
+
+.stationOn {
+  opacity: 1;
+  box-shadow: var(--shadow-elevated);
+}
+
+.stationTag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.stationBody {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+}
+
+.stationBody strong {
+  font-size: var(--fs-base);
+}
+
+.stationSecret {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.keyPublic,
+.keyPrivate {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px var(--space-2);
+  border-radius: 999px;
+  animation: keyIn var(--transition-base) ease-out;
+}
+
+.keyPublic {
+  background: color-mix(in srgb, var(--color-success) 16%, transparent);
+  color: var(--color-success);
+}
+
+.keyPrivate {
+  background: color-mix(in srgb, #a78bfa 20%, transparent);
+  color: #7c5ce0;
+}
+
+@keyframes keyIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------- encrypt/decrypt tubes ---------- */
+
+.tubes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 641px) {
+  .tubes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tube {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  opacity: 0.4;
+  transition: opacity var(--transition-base);
+}
+
+.tubeOn {
+  opacity: 1;
+}
+
+.tubeLabel {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.tubeFlow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.msgToken {
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  min-width: 56px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, #38bdf8 22%, transparent);
+  box-shadow: var(--shadow-soft);
+  transition: background-color var(--transition-base);
+}
+
+.msgTokenHidden {
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  min-width: 56px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--color-border);
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.msgCipher {
+  background: color-mix(in srgb, var(--color-secondary) 35%, transparent);
+  animation: scramble var(--transition-base) ease-out;
+}
+
+.msgDone {
+  background: color-mix(in srgb, var(--color-success) 28%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--color-success) 45%, transparent);
+}
+
+@keyframes scramble {
+  0% {
+    transform: rotate(0) scale(0.7);
+    opacity: 0;
+  }
+  50% {
+    transform: rotate(6deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.tubeArrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---------- attacker ---------- */
+
+.attacker {
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  border: 1.5px dashed var(--color-danger);
+  background: color-mix(in srgb, var(--color-danger) 6%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  animation: keyIn var(--transition-base) ease-out;
+}
+
+.attackerTitle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-danger);
+}
+
+.attackerBody {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.attackerShake {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  animation: shakeNo calc(var(--transition-base) * 3) ease-in-out infinite;
+}
+
+@keyframes shakeNo {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(2px);
+  }
+  60% {
+    transform: translateX(-1px);
+  }
+  80% {
+    transform: translateX(1px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .attackerShake {
+    animation: none;
+  }
+}

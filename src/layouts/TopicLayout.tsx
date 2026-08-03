@@ -1,41 +1,29 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { getTopicByPath } from '@/data/topics';
-import { useIsMobile } from '@/hooks/useMediaQuery';
-import { Header } from './Header';
-import { ProgressBar } from './ProgressBar';
-import { SectionSidebar } from './SectionSidebar';
-import { SectionBottomSheet } from './SectionBottomSheet';
 import { PrevNextFooter } from './PrevNextFooter';
+import { TopicSidebar } from './TopicSidebar';
 import styles from './TopicLayout.module.css';
 
 export function TopicLayout() {
   const location = useLocation();
-  const isMobile = useIsMobile();
   const topic = getTopicByPath(location.pathname);
 
   if (!topic) {
     return (
-      <>
-        <Header />
-        <main className="container">
-          <p>ไม่พบหัวข้อนี้</p>
-        </main>
-      </>
+      <main className={styles.notFound}>
+        <p>ไม่พบหัวข้อนี้</p>
+        <Link to="/">← กลับหน้าแรก</Link>
+      </main>
     );
   }
 
   return (
-    <>
-      <Header />
-      <ProgressBar currentTopicId={topic.id} />
-      <div className={styles.body}>
-        {!isMobile && <SectionSidebar />}
-        <div className={styles.content}>
-          <Outlet />
-          <PrevNextFooter currentTopicId={topic.id} />
-        </div>
+    <div className={styles.shell}>
+      <TopicSidebar currentTopicId={topic.id} />
+      <div className={styles.content}>
+        <Outlet />
+        <PrevNextFooter currentTopicId={topic.id} />
       </div>
-      {isMobile && <SectionBottomSheet />}
-    </>
+    </div>
   );
 }

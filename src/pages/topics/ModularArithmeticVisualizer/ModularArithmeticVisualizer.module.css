@@ -1,0 +1,161 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: min(420px, 100%);
+}
+
+.quickRow {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.quickBtn {
+  min-height: var(--touch-target-min);
+  min-width: 56px;
+  border-radius: 999px;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  transition: transform var(--transition-fast);
+}
+
+.quickBtn:hover {
+  transform: translateY(-1px);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+/* ---------- wrapping number line ---------- */
+
+.walkLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  justify-content: center;
+  max-width: 100%;
+  padding: 0 var(--space-2) var(--space-4);
+}
+
+.walkTick {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.walkTickDone {
+  background: var(--lap-color, var(--color-accent));
+}
+
+.walkTickCurrent {
+  transform: scale(1.5);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--color-secondary) 60%, transparent);
+  background: var(--color-secondary);
+}
+
+.walkLabel {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+/* ---------- clock ---------- */
+
+.clock {
+  width: min(320px, 80vw);
+  height: auto;
+  overflow: visible;
+}
+
+.face {
+  fill: var(--color-bg-elevated);
+  stroke: var(--color-border);
+  stroke-width: 1;
+  filter: drop-shadow(var(--shadow-soft));
+}
+
+.lapArc {
+  fill: none;
+  stroke-width: 2;
+  opacity: 0.28;
+  animation: arcIn var(--transition-base) ease-out;
+}
+
+@keyframes arcIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.28;
+  }
+}
+
+.tickLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--color-text-muted);
+}
+
+.tickLabelLanding {
+  fill: var(--color-secondary-contrast);
+  font-weight: 700;
+}
+
+.landingGlow {
+  fill: color-mix(in srgb, var(--color-secondary) 45%, transparent);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: glowPop var(--transition-base) ease-out;
+}
+
+@keyframes glowPop {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.handGroup {
+  transform-box: view-box;
+  transform-origin: center;
+  transition: transform var(--transition-base);
+}
+
+.hand {
+  stroke: var(--color-secondary);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.handHub {
+  fill: var(--color-secondary);
+}
+
+.readout {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.readout strong {
+  font-family: var(--font-mono);
+  color: var(--color-text);
+}
