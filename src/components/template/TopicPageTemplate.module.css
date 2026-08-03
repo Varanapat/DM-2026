@@ -1,13 +1,20 @@
 .header {
-  padding: var(--space-4) 0 var(--space-3);
+  padding: var(--space-2) 0;
+  text-align: center;
 }
 
 .title {
-  font-size: var(--fs-2xl);
-  margin-bottom: var(--space-2);
+  font-size: clamp(1.5rem, 1.15rem + 1.3vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
 }
 
 .objective {
+  max-width: 60ch;
+  margin: 0 auto;
   color: var(--color-text-muted);
-  font-size: var(--fs-lg);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
 }

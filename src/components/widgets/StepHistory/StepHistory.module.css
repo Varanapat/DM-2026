@@ -1,0 +1,57 @@
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.titleSecondary {
+  color: var(--color-secondary-contrast);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.entry {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  opacity: 0.6;
+  font-size: var(--fs-sm);
+  animation: slideFadeIn var(--transition-base) ease-out;
+}
+
+.entryLatest {
+  opacity: 1;
+  border-left-color: var(--color-accent);
+  box-shadow: var(--shadow-soft);
+  font-size: var(--fs-base);
+  font-weight: 600;
+}
+
+.empty {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+}

@@ -1,33 +1,36 @@
-import type { ComponentType } from 'react';
-import { DivisibilityPage } from '@/pages/topics/DivisibilityPage';
-import { PrimesPage } from '@/pages/topics/PrimesPage';
-import { SieveOfEratosthenesPage } from '@/pages/topics/SieveOfEratosthenesPage';
-import { GcdEuclideanPage } from '@/pages/topics/GcdEuclideanPage';
-import { LcmPage } from '@/pages/topics/LcmPage';
-import { PrimeFactorizationPage } from '@/pages/topics/PrimeFactorizationPage';
-import { ModularArithmeticPage } from '@/pages/topics/ModularArithmeticPage';
-import { CongruencePage } from '@/pages/topics/CongruencePage';
-import { FastModularExponentiationPage } from '@/pages/topics/FastModularExponentiationPage';
-import { EulerTotientPage } from '@/pages/topics/EulerTotientPage';
-import { FermatsLittleTheoremPage } from '@/pages/topics/FermatsLittleTheoremPage';
-import { ExtendedEuclideanPage } from '@/pages/topics/ExtendedEuclideanPage';
-import { ChineseRemainderTheoremPage } from '@/pages/topics/ChineseRemainderTheoremPage';
-import { RsaCryptographyPage } from '@/pages/topics/RsaCryptographyPage';
+import { lazy, type ComponentType, type LazyExoticComponent } from 'react';
 
-/** Maps each TOPIC_ORDER id (src/data/topics.ts) to its page component. */
-export const TOPIC_PAGE_COMPONENTS: Record<string, ComponentType> = {
-  divisibility: DivisibilityPage,
-  primes: PrimesPage,
-  'sieve-of-eratosthenes': SieveOfEratosthenesPage,
-  'gcd-euclidean': GcdEuclideanPage,
-  lcm: LcmPage,
-  'prime-factorization': PrimeFactorizationPage,
-  'modular-arithmetic': ModularArithmeticPage,
-  congruence: CongruencePage,
-  'fast-modular-exponentiation': FastModularExponentiationPage,
-  'euler-totient': EulerTotientPage,
-  'fermats-little-theorem': FermatsLittleTheoremPage,
-  'extended-euclidean': ExtendedEuclideanPage,
-  'chinese-remainder-theorem': ChineseRemainderTheoremPage,
-  'rsa-cryptography': RsaCryptographyPage,
+/** Maps each TOPIC_ORDER id (src/data/topics.ts) to its page component.
+ * Pages are lazy so each topic's visualizer ships as its own chunk. */
+export const TOPIC_PAGE_COMPONENTS: Record<string, LazyExoticComponent<ComponentType>> = {
+  divisibility: lazy(() => import('@/pages/topics/DivisibilityPage').then((m) => ({ default: m.DivisibilityPage }))),
+  primes: lazy(() => import('@/pages/topics/PrimesPage').then((m) => ({ default: m.PrimesPage }))),
+  'sieve-of-eratosthenes': lazy(() =>
+    import('@/pages/topics/SieveOfEratosthenesPage').then((m) => ({ default: m.SieveOfEratosthenesPage })),
+  ),
+  'gcd-euclidean': lazy(() => import('@/pages/topics/GcdEuclideanPage').then((m) => ({ default: m.GcdEuclideanPage }))),
+  lcm: lazy(() => import('@/pages/topics/LcmPage').then((m) => ({ default: m.LcmPage }))),
+  'prime-factorization': lazy(() =>
+    import('@/pages/topics/PrimeFactorizationPage').then((m) => ({ default: m.PrimeFactorizationPage })),
+  ),
+  'modular-arithmetic': lazy(() =>
+    import('@/pages/topics/ModularArithmeticPage').then((m) => ({ default: m.ModularArithmeticPage })),
+  ),
+  congruence: lazy(() => import('@/pages/topics/CongruencePage').then((m) => ({ default: m.CongruencePage }))),
+  'fast-modular-exponentiation': lazy(() =>
+    import('@/pages/topics/FastModularExponentiationPage').then((m) => ({ default: m.FastModularExponentiationPage })),
+  ),
+  'euler-totient': lazy(() => import('@/pages/topics/EulerTotientPage').then((m) => ({ default: m.EulerTotientPage }))),
+  'fermats-little-theorem': lazy(() =>
+    import('@/pages/topics/FermatsLittleTheoremPage').then((m) => ({ default: m.FermatsLittleTheoremPage })),
+  ),
+  'extended-euclidean': lazy(() =>
+    import('@/pages/topics/ExtendedEuclideanPage').then((m) => ({ default: m.ExtendedEuclideanPage })),
+  ),
+  'chinese-remainder-theorem': lazy(() =>
+    import('@/pages/topics/ChineseRemainderTheoremPage').then((m) => ({ default: m.ChineseRemainderTheoremPage })),
+  ),
+  'rsa-cryptography': lazy(() =>
+    import('@/pages/topics/RsaCryptographyPage').then((m) => ({ default: m.RsaCryptographyPage })),
+  ),
 };
