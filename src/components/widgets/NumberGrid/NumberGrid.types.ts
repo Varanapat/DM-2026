@@ -1,4 +1,16 @@
-export type CellState = 'default' | 'success' | 'danger' | 'muted' | 'current' | 'crossed' | 'gold' | 'fallen';
+export type CellState =
+  | 'default'
+  | 'success'
+  | 'danger'
+  | 'muted'
+  | 'current'
+  | 'crossed'
+  | 'gold'
+  | 'fallen'
+  | 'multipleA'
+  | 'multipleB'
+  | 'overlap'
+  | 'lcmHit';
 
 export interface CellDecor {
   /** small identity bar under the number (e.g. the sieve round that crossed it) */

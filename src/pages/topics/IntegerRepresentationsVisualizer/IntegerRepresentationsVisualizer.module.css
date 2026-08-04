@@ -1,0 +1,190 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.numberInput {
+  width: 90px;
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  text-align: center;
+  color: var(--color-text);
+}
+
+.chipRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.chipLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.chipBtn {
+  min-height: var(--touch-target-min);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--color-border);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.chipBtnActive {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  animation: rowIn var(--transition-base) ease-out both;
+  flex-wrap: wrap;
+}
+
+.eq {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.remainder {
+  color: var(--color-secondary);
+}
+
+.digitTag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resultPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-success);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--color-success) 40%, transparent);
+  animation: resultIn var(--transition-base) ease-out;
+}
+
+.resultTitle {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.digitsRow {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.digitChip {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  background: color-mix(in srgb, var(--color-success) 20%, transparent);
+  color: var(--color-success);
+  animation: chipPop var(--transition-base) ease-out both;
+}
+
+.resultEq {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+@keyframes resultIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes chipPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row,
+  .resultPanel,
+  .digitChip {
+    animation: none;
+  }
+}

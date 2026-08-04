@@ -13,6 +13,12 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
     misconceptionTh: 'สับสนระหว่าง "a หาร b" กับ "b หาร a" (เทียบ 3|12 ✅ vs 12|3 ❌)',
     primaryWidgets: ['NumberGrid', 'SliderInput'],
   },
+  'integer-representations': {
+    coreConceptTh:
+      'จำนวนเต็มเขียนแทนได้หลายฐาน ไม่ใช่แค่ฐาน 10 — แปลงเลขไปฐานอื่นด้วยการหารซ้ำด้วยฐานนั้นแล้วเก็บเศษไว้ทีละหลัก ลองนึกภาพหาร n ด้วยฐาน b ไปเรื่อย ๆ จนตัวตั้งเหลือ 0 — เศษที่เก็บได้แต่ละรอบคือหลักของคำตอบ อ่านจากรอบสุดท้ายย้อนไปรอบแรก',
+    misconceptionTh: 'คิดว่าต้องอ่านเศษจากรอบแรกไปรอบสุดท้าย (จริง ๆ ต้องอ่านย้อนกลับ รอบสุดท้ายคือหลักซ้ายสุด)',
+    primaryWidgets: ['StepController'],
+  },
   primes: {
     coreConceptTh:
       'จำนวนเฉพาะคือจำนวนเต็มที่มากกว่า 1 และไม่มีตัวหารอื่นนอกจาก 1 กับตัวมันเอง ลองนึกภาพจัดจุด n จุดเป็นสี่เหลี่ยมผืนผ้า (แถว × คอลัมน์) — ถ้าจัดได้แบบเดียวคือแถวเดียว (1×n) แปลว่า n เป็นจำนวนเฉพาะ ไม่มีทางแบ่งเป็นกลุ่มเท่า ๆ กันได้เลยนอกจากกลุ่มเดียว',
@@ -31,11 +37,12 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
     misconceptionTh: 'คิดว่าต้องหา factor ทั้งหมดก่อนถึงจะหา gcd ได้ (ไม่จำเป็น!)',
     primaryWidgets: ['StepController', 'CodeSyncPanel', 'BarCompare'],
   },
-  lcm: {
+  'gcd-prime-factorization': {
     coreConceptTh:
-      'ตัวคูณร่วมน้อย (LCM) คือจำนวนที่น้อยที่สุดที่เป็นตัวคูณร่วมของทั้งสองตัว ลองนึกภาพรถเมล์สองสายออกจากป้ายพร้อมกันตอนนาทีที่ 0 สายแรกออกทุก a นาที สายที่สองออกทุก b นาที — ครั้งถัดไปที่ทั้งสองสายจะออกพร้อมกันอีกครั้งคือนาทีที่ lcm(a, b)',
-    misconceptionTh: 'คิดว่า lcm ต้องหาจาก multiples ทั้งหมดเสมอ (ไม่ efficient สำหรับเลขใหญ่)',
-    primaryWidgets: ['SliderInput', 'BarCompare'],
+      'หา GCD อีกวิธีหนึ่งคือแยกทั้งสองจำนวนเป็นผลคูณของจำนวนเฉพาะ หาจำนวนเฉพาะที่ตรงกันทั้งสองฝั่ง แล้วเลือกเลขชี้กำลังต่ำสุดของแต่ละตัวมาคูณกัน ลองนึกภาพ 24 = 2³×3¹ และ 36 = 2²×3² — ตัวร่วมคือ 2 กับ 3 เลือกกำลังต่ำสุด 2² กับ 3¹ คูณกันได้ 4×3 = 12',
+    misconceptionTh:
+      'คิดว่าวิธีนี้ดีกว่าหรือเร็วกว่า Euclidean Algorithm (จริง ๆ ไม่ efficient เพราะยังไม่มีอัลกอริทึมที่มีประสิทธิภาพสำหรับแยกตัวประกอบเฉพาะของเลขจำนวนมาก)',
+    primaryWidgets: ['StepController'],
   },
   'prime-factorization': {
     coreConceptTh:
@@ -54,6 +61,18 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
       'a และ b จะ "สมภาค" กัน mod n (เขียนว่า a ≡ b (mod n)) ก็ต่อเมื่อ n หาร (a − b) ลงตัว ลองนึกภาพนาฬิกา n ช่องแบบเดียวกับ modular arithmetic — a กับ b congruent กันแปลว่าเข็มนาฬิกาชี้ไปที่ "ช่องเดียวกัน" แม้ a กับ b จะเป็นคนละตัวเลข เช่น 2 กับ 14 อยู่ช่องเดียวกันบนนาฬิกา 12 ช่อง',
     misconceptionTh: 'สับสนระหว่าง "=" กับ "≡" — congruent ไม่ได้แปลว่าค่าเท่ากัน แต่อยู่ "class" เดียวกัน',
     primaryWidgets: ['ClockModulo', 'NumberGrid'],
+  },
+  'pseudorandom-numbers': {
+    coreConceptTh:
+      'Linear Congruential Generator (LCG) สร้างลำดับตัวเลขที่ดู "สุ่ม" จากสูตร x(n+1) = (a·x(n) + c) mod m ลองนึกภาพเข็มวิ่งบนนาฬิกา mod m แต่ละก้าวคำนวณจากตำแหน่งเดิมด้วยสูตรตายตัว — ไม่ได้สุ่มจริง เดี๋ยวก็จะวนกลับมาซ้ำ (period) เพราะตำแหน่งบนนาฬิกามีจำกัด',
+    misconceptionTh: 'คิดว่า pseudorandom คือสุ่มจริง (จริง ๆ กำหนด seed เดียวกันแล้วได้ลำดับเดิมทุกครั้ง)',
+    primaryWidgets: ['ClockModulo'],
+  },
+  'check-digits': {
+    coreConceptTh:
+      'เลขตรวจสอบ (check digit) คำนวณจากตัวเลขอื่นในรหัสด้วยผลรวมถ่วงน้ำหนัก mod 10 ลองนึกภาพบาร์โค้ด UPC เอาหลักคี่คูณ 3 หลักคู่คูณ 1 แล้วบวกกันทั้งหมด ถ้าผลรวม mod 10 ไม่เท่ากับเลขตรวจสอบ แปลว่าพิมพ์เลขผิดที่ไหนสักที่แน่นอน',
+    misconceptionTh: 'คิดว่า check digit บอกได้ว่าผิดที่หลักไหน (จริง ๆ บอกได้แค่ว่า "มีที่ผิด" ไม่บอกตำแหน่ง)',
+    primaryWidgets: ['StepController'],
   },
   'fast-modular-exponentiation': {
     coreConceptTh:
@@ -78,6 +97,12 @@ export const TOPIC_CONTENT: Record<string, TopicContent> = {
       "นอกจากหา gcd(a, b) ได้แล้ว ขั้นตอนวิธียูคลิดแบบขยายยังหาสัมประสิทธิ์ x, y ที่ทำให้ ax + by = gcd(a, b) ได้ด้วย (Bézout's identity) ลองนึกภาพเดินย้อนรอยทุกขั้นตอนของการหารเศษซ้ำ ๆ จากขั้นตอนสุดท้ายกลับไปขั้นแรก แทนค่ากลับไปเรื่อย ๆ จนไล่หาค่า x, y ได้ — เหมือนไขปริศนาย้อนรอยจากคำตอบกลับไปจุดเริ่มต้น",
     misconceptionTh: 'คิดว่า x,y ที่หาได้มีคำตอบเดียว (จริง ๆ มีอนันต์คำตอบ, มีแค่ "particular solution")',
     primaryWidgets: ['StepController', 'CodeSyncPanel'],
+  },
+  'classical-ciphers': {
+    coreConceptTh:
+      'การเข้ารหัสแบบ Shift/Affine แปลงตัวอักษรเป็นตัวเลข (A=0..Z=25) แล้วบวกหรือคูณด้วยกุญแจภายใต้ mod 26 ลองนึกภาพหมุนวงล้อตัวอักษร 26 ช่อง — เข้ารหัสคือหมุนไปข้างหน้าตามกุญแจ ถอดรหัสคือหมุนกลับ (Affine ต้องใช้ตัวผกผันมอดุลาร์จาก Extended Euclidean ในการถอดรหัส)',
+    misconceptionTh: 'คิดว่า Affine cipher เลือก a เท่าไรก็ได้ (จริง ๆ ต้อง gcd(a,26)=1 ไม่งั้นถอดรหัสกลับไม่ได้)',
+    primaryWidgets: ['StepController'],
   },
   'chinese-remainder-theorem': {
     coreConceptTh:

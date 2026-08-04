@@ -37,33 +37,6 @@ export function gcdSteps(a: number, b: number): EuclideanStep[] {
   return steps;
 }
 
-export function lcm(a: number, b: number): number {
-  const x = Math.abs(Math.trunc(a));
-  const y = Math.abs(Math.trunc(b));
-  if (x === 0 || y === 0) return 0;
-  return (x / gcd(x, y)) * y;
-}
-
-export interface MultipleEntry {
-  value: number;
-  ofA: boolean;
-  ofB: boolean;
-}
-
-/** Multiples of a and b merged in ascending order, ending at lcm(a,b) —
- * the "two trains meet" trace for the LCM visualizer. */
-export function multiplesUntilLcm(a: number, b: number): MultipleEntry[] {
-  const target = lcm(a, b);
-  if (target === 0) return [];
-  const entries: MultipleEntry[] = [];
-  for (let v = 1; v <= target; v++) {
-    const ofA = v % a === 0;
-    const ofB = v % b === 0;
-    if (ofA || ofB) entries.push({ value: v, ofA, ofB });
-  }
-  return entries;
-}
-
 /** Worst-case number of checks a naive "try every candidate divisor" approach
  * needs — used only for the naive-vs-fast step-count comparison widget. */
 export function naiveDivisorCheckCount(a: number, b: number): number {

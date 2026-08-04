@@ -227,27 +227,30 @@ export function PrimesVisualizer() {
       }
     >
       <div className={styles.canvas}>
-        <p className={styles.arrangementLabel}>
-          {isSqrtBeat
-            ? `Step 1: คำนวณ √${n} เพื่อรู้ขอบเขตตัวหารที่ต้องเช็ค`
-            : isVerdict
+        {!isSqrtBeat && (
+          <p className={styles.arrangementLabel}>
+            {isVerdict
               ? foundDivisor
                 ? `พบตัวประกอบ ${foundDivisor.prime} × ${n / foundDivisor.prime}`
                 : `ไม่มีตัวหารเฉพาะไหนหารลงตัว`
               : `ลองหาร ${n} ด้วยจำนวนเฉพาะ ${currentStep?.prime}`}
-        </p>
+          </p>
+        )}
 
         {testPrimes.length > 0 && (
-          <div className={styles.chipsRow}>
-            {primeChips.map((c) => (
+          <div className={isSqrtBeat ? `${styles.chipsRow} ${styles.chipsRowSpotlight}` : styles.chipsRow}>
+            {primeChips.map((c, i) => (
               <span
                 key={c.prime}
+                style={isSqrtBeat ? ({ '--index': i } as React.CSSProperties) : undefined}
                 className={
                   c.state === 'hit'
                     ? `${styles.chip} ${styles.chipHit}`
                     : c.state === 'clear'
                       ? `${styles.chip} ${styles.chipClear}`
-                      : styles.chip
+                      : isSqrtBeat
+                        ? `${styles.chip} ${styles.chipSpotlight}`
+                        : styles.chip
                 }
               >
                 {c.prime}
