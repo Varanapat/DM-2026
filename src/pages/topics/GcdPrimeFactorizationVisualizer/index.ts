@@ -1,0 +1,1 @@
+export { GcdPrimeFactorizationVisualizer } from './GcdPrimeFactorizationVisualizer';

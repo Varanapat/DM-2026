@@ -21,6 +21,13 @@ export const TOPIC_ORDER: TopicMeta[] = [
     dependsOn: [],
   },
   {
+    id: 'integer-representations',
+    path: '/integer-representations',
+    titleTh: 'การแทนจำนวนเต็ม (Integer Representations)',
+    objectiveTh: 'เข้าใจการแทนจำนวนในฐานต่าง ๆ (2, 8, 16) และแปลงเลขไปมาระหว่างฐานด้วยอัลกอริทึมหารซ้ำ',
+    dependsOn: ['divisibility'],
+  },
+  {
     id: 'primes',
     path: '/primes',
     titleTh: 'จำนวนเฉพาะ (Prime Numbers)',
@@ -42,10 +49,10 @@ export const TOPIC_ORDER: TopicMeta[] = [
     dependsOn: ['divisibility'],
   },
   {
-    id: 'lcm',
-    path: '/lcm',
-    titleTh: 'ตัวคูณร่วมน้อย (LCM)',
-    objectiveTh: 'เห็นความสัมพันธ์ lcm(a,b) × gcd(a,b) = a × b ผ่านภาพ ไม่ใช่ท่องสูตร',
+    id: 'gcd-prime-factorization',
+    path: '/gcd-prime-factorization',
+    titleTh: 'GCD ด้วยการแยกตัวประกอบเฉพาะ (GCD by Prime Factorisation)',
+    objectiveTh: 'หา GCD อีกวิธีหนึ่งด้วยการแยกตัวประกอบเฉพาะ แล้วเห็นว่าทำไมวิธีนี้ไม่ efficient เท่า Euclidean Algorithm',
     dependsOn: ['gcd-euclidean'],
   },
   {
@@ -68,6 +75,20 @@ export const TOPIC_ORDER: TopicMeta[] = [
     titleTh: 'สมภาค (Congruence)',
     objectiveTh: 'เข้าใจว่า a ≡ b (mod n) หมายถึง a กับ b "อยู่ตำแหน่งเดียวกัน" บนนาฬิกา mod n',
     dependsOn: ['modular-arithmetic'],
+  },
+  {
+    id: 'pseudorandom-numbers',
+    path: '/pseudorandom-numbers',
+    titleTh: 'จำนวนสุ่มเทียม (Pseudorandom Numbers)',
+    objectiveTh: 'เข้าใจ Linear Congruential Generator (LCG) และเห็นว่าลำดับที่ดู "สุ่ม" จริง ๆ คำนวณได้แน่นอนด้วยสูตรมอดุลาร์',
+    dependsOn: ['congruence'],
+  },
+  {
+    id: 'check-digits',
+    path: '/check-digits',
+    titleTh: 'เลขตรวจสอบ (Check Digits)',
+    objectiveTh: 'เข้าใจว่าเลขตรวจสอบท้ายบาร์โค้ด (UPC) ใช้เลขคณิตมอดุลาร์ตรวจจับข้อผิดพลาดจากการพิมพ์เลขผิดได้อย่างไร',
+    dependsOn: ['congruence'],
   },
   {
     id: 'fast-modular-exponentiation',
@@ -96,6 +117,13 @@ export const TOPIC_ORDER: TopicMeta[] = [
     titleTh: 'ขั้นตอนวิธียูคลิดแบบขยาย (Extended Euclidean Algorithm)',
     objectiveTh: 'เข้าใจว่านอกจากหา gcd แล้ว เราหาค่า x,y ที่ทำให้ ax+by=gcd(a,b) ได้ด้วย (Bézout\'s identity)',
     dependsOn: ['gcd-euclidean'],
+  },
+  {
+    id: 'classical-ciphers',
+    path: '/classical-ciphers',
+    titleTh: 'การเข้ารหัสแบบดั้งเดิม (Classical Ciphers)',
+    objectiveTh: 'เข้าใจการเข้ารหัสแบบคลาสสิก (Shift, Affine) ที่ใช้เลขคณิตมอดุลาร์แปลงตัวอักษรเป็นตัวเลขแล้วเข้า/ถอดรหัส',
+    dependsOn: ['modular-arithmetic', 'extended-euclidean'],
   },
   {
     id: 'chinese-remainder-theorem',

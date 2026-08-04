@@ -1,0 +1,163 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-4);
+}
+
+.messageInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.messageInput {
+  width: 220px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.modeToggle {
+  display: flex;
+  gap: var(--space-1);
+  padding: 3px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+}
+
+.modeBtn {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.modeBtnActive {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.keysRow {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.keyGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.keyInput {
+  width: 56px;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  text-align: center;
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-2) 0;
+}
+
+.transformPanel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 64px;
+}
+
+.transformSkip {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.transformLetter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.transformNum {
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.transformArrow {
+  font-size: var(--fs-lg);
+  color: var(--color-accent);
+}
+
+.textRows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.textRow {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.letterCell {
+  width: 32px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.letterCellCipher {
+  background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+  color: var(--color-accent);
+}
+
+.letterCellActive {
+  outline: 2px solid var(--color-secondary);
+}
+
+.letterCellPending {
+  background: none;
+  outline: 2px dashed var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.keyNote {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 480px;
+}

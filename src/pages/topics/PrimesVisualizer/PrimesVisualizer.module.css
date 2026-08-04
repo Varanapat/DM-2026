@@ -144,6 +144,30 @@
   color: var(--color-accent-contrast);
 }
 
+.chipsRowSpotlight {
+  padding: var(--space-2) var(--space-3);
+  border: 1.5px dashed var(--color-secondary);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-secondary) 8%, transparent);
+}
+
+.chipSpotlight {
+  background: color-mix(in srgb, var(--color-secondary) 28%, transparent);
+  color: var(--color-secondary);
+  animation: chipSpotlightPulse 1.1s ease-in-out infinite;
+  animation-delay: calc(var(--index, 0) * 120ms);
+}
+
+@keyframes chipSpotlightPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
 .stage {
   width: 100%;
   height: auto;
@@ -227,7 +251,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dotOverflow {
+  .dotOverflow,
+  .chipSpotlight {
     animation: none;
   }
 }

@@ -1,0 +1,80 @@
+.hint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+.barcodeRow {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.digitBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.digitBtn {
+  width: 40px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  background: var(--color-border);
+  color: var(--color-text);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.digitBtn:hover {
+  transform: translateY(-2px);
+}
+
+.digitBtnDone {
+  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  color: var(--color-accent);
+}
+
+.digitBtnActive {
+  outline: 2px solid var(--color-secondary);
+  background: color-mix(in srgb, var(--color-secondary) 22%, transparent);
+  color: var(--color-secondary);
+}
+
+.checkDigit {
+  background: color-mix(in srgb, var(--color-success) 22%, transparent);
+  color: var(--color-success);
+  outline: 2px solid var(--color-success);
+}
+
+.checkDigitPending {
+  background: none;
+  outline: 2px dashed var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.weightTag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.sumReadout {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}

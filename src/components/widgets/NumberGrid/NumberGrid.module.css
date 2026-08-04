@@ -100,6 +100,40 @@
   transition: opacity var(--transition-base), transform var(--transition-base);
 }
 
+.multipleA {
+  background: color-mix(in srgb, #38bdf8 25%, transparent);
+  color: #38bdf8;
+  font-weight: 700;
+  animation: popScale var(--transition-base) ease-out;
+}
+
+.multipleB {
+  background: color-mix(in srgb, var(--color-secondary) 28%, transparent);
+  color: var(--color-secondary);
+  font-weight: 700;
+  animation: popScale var(--transition-base) ease-out;
+}
+
+.overlap {
+  background: color-mix(in srgb, var(--color-success) 32%, transparent);
+  color: var(--color-success);
+  font-weight: 700;
+  animation: popScale var(--transition-base) ease-out;
+}
+
+.lcmHit {
+  position: relative;
+  z-index: 2;
+  background: color-mix(in srgb, var(--color-success) 32%, transparent);
+  color: var(--color-success);
+  font-weight: 700;
+  outline: 3px solid var(--color-success);
+  outline-offset: 1px;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-success) 50%, transparent);
+  transform: scale(1.15);
+  animation: popScale var(--transition-base) ease-out;
+}
+
 @keyframes crossIn {
   from {
     opacity: 1;

@@ -26,7 +26,10 @@ export interface RoadmapSpineNode {
  * off the single spine row it depends on most directly.
  */
 export const ROADMAP_STRUCTURE: RoadmapSpineNode[] = [
-  { topicId: 'divisibility' },
+  {
+    topicId: 'divisibility',
+    branches: [{ topicId: 'integer-representations', side: 'right' }],
+  },
   {
     topicId: 'primes',
     branches: [
@@ -37,17 +40,22 @@ export const ROADMAP_STRUCTURE: RoadmapSpineNode[] = [
   {
     topicId: 'gcd-euclidean',
     branches: [
-      { topicId: 'lcm', side: 'right' },
+      { topicId: 'gcd-prime-factorization', side: 'right' },
       { topicId: 'extended-euclidean', side: 'left' },
     ],
   },
+  { topicId: 'modular-arithmetic' },
   {
-    topicId: 'modular-arithmetic',
-    branches: [{ topicId: 'congruence', side: 'right' }],
+    topicId: 'congruence',
+    branches: [
+      { topicId: 'pseudorandom-numbers', side: 'right' },
+      { topicId: 'check-digits', side: 'left' },
+    ],
   },
   { topicId: 'fast-modular-exponentiation' },
   { topicId: 'euler-totient' },
   { topicId: 'fermats-little-theorem' },
+  { topicId: 'classical-ciphers' },
   { topicId: 'chinese-remainder-theorem' },
   { topicId: 'rsa-cryptography' },
 ];
