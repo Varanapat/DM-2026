@@ -7,7 +7,7 @@ import { EquationHighlighter } from '@/components/widgets/EquationHighlighter';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { gcdSteps } from '@/utils/algorithms/euclidean';
 import { gcdTable, totient } from '@/utils/algorithms/modular';
@@ -100,18 +100,29 @@ export function EulerTotientVisualizer() {
         }
         formula={
           <>
-            φ(<b>n</b>) = จำนวน <b>k</b> ใน [1, n] ที่ gcd(<b>k</b>, <b>n</b>) = 1
+            φ(<b>n</b>) = จำนวนสมาชิกของ {'{ '}
+            <b>k</b> ∈ ℤ : 1 ≤ <b>k</b> ≤ <b>n</b> และ gcd(<b>k</b>, <b>n</b>) = 1{' }'}
           </>
         }
         note={
-          <>
-            ฟังก์ชันออยเลอร์ <code>φ(n)</code> คือจำนวนของ k ในช่วง [1, n] ที่ coprime กับ n (คือ gcd(k, n) = 1) ลองนึกภาพเรียงเลข
-            1 ถึง n แล้วนับว่ามีกี่ตัวที่<strong>ไม่มีตัวประกอบร่วม</strong>กับ n เลยนอกจาก 1 — จำนวนที่นับได้คือ φ(n)
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>n</code> เป็นจำนวนเต็มบวก
+              </>
+            }
+            claim={
+              <>
+                <strong>ฟังก์ชันออยเลอร์</strong> <code>φ(n)</code> นิยามให้เป็นขนาดของเซตด้านบน คือนับดูว่าในช่วง 1 ถึง n
+                มีจำนวนเต็มกี่ตัวที่ <code>gcd(k, n) = 1</code>
+              </>
+            }
+            restate={<>หรือกล่าวได้ว่า φ(n) คือจำนวนของจำนวนเต็มตั้งแต่ 1 ถึง n ที่เป็นจำนวนเฉพาะสัมพัทธ์กับ n</>}
+          />
         }
       />
       <VisualizerFrame
-      title="Euler's Totient — นับเพื่อน coprime"
+      title="Euler's Totient — นับจำนวนที่ coprime กับ n"
       headerExtra={
         <div className={styles.controls}>
           <SliderInput label="n" min={2} max={36} value={n} onChange={setN} />

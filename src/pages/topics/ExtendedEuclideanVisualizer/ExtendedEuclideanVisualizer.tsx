@@ -3,7 +3,7 @@ import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { extGcdSteps } from '@/utils/algorithms/extendedEuclidean';
 import styles from './ExtendedEuclideanVisualizer.module.css';
@@ -88,11 +88,25 @@ export function ExtendedEuclideanVisualizer() {
           </>
         }
         note={
-          <>
-            นอกจากหา gcd(a, b) ได้แล้ว ขั้นตอนวิธียูคลิดแบบขยายยังหาสัมประสิทธิ์ <code>x, y</code> ที่ทำให้สมการนี้เป็นจริงได้ด้วย
-            (Bézout's identity) ลองนึกภาพเดินย้อนรอยทุกขั้นตอนของการหารเศษซ้ำ ๆ จากขั้นตอนสุดท้ายกลับไปขั้นแรก แทนค่ากลับไปเรื่อย ๆ
-            จน<strong>ไล่หาค่า x, y</strong> ได้
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>a</code>, <code>b</code> ∈ ℤ โดยที่ a และ b ไม่เป็นศูนย์พร้อมกัน
+              </>
+            }
+            claim={
+              <>
+                <strong>เอกลักษณ์ของเบซูต์</strong> รับประกันว่ามีจำนวนเต็ม <code>x</code> และ <code>y</code>{' '}
+                อย่างน้อยหนึ่งคู่เสมอที่ทำให้สมการด้านบนเป็นจริง
+              </>
+            }
+            restate={
+              <>
+                หรือกล่าวได้ว่า ตัวหารร่วมมากของ a และ b เขียนเป็นผลรวมเชิงเส้นของ a และ b ที่มีสัมประสิทธิ์เป็นจำนวนเต็มได้เสมอ
+                โดยขั้นตอนวิธียูคลิดแบบขยายจะหาคู่ (x, y) นั้นด้วยการแทนค่าย้อนกลับจากขั้นสุดท้ายไปขั้นแรก
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame

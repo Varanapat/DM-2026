@@ -3,7 +3,7 @@ import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { primeFactorization } from '@/utils/algorithms/factorization';
 import styles from './GcdPrimeFactorizationVisualizer.module.css';
@@ -75,19 +75,67 @@ export function GcdPrimeFactorizationVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            การหาตัวหารร่วมมากของจำนวนเต็มบวกสองจำนวน ด้วยการแยกแต่ละจำนวนออกเป็นผลคูณของจำนวนเฉพาะก่อน
+            แล้วจึงเลือกจำนวนเฉพาะที่ปรากฏร่วมกันทั้งสองฝั่ง โดยใช้เลขชี้กำลังที่น้อยที่สุดของแต่ละตัวมาคูณกัน
+          </>
+        }
         formula={
           <>
-            gcd(<b>a</b>, <b>b</b>) = ผลคูณของ p<sup>min(eₐ, e_b)</sup> สำหรับทุกจำนวนเฉพาะ p ที่ตรงกัน
+            gcd(<b>a</b>, <b>b</b>) = p<sub>1</sub>
+            <sup>
+              min(e<sub>1</sub>, f<sub>1</sub>)
+            </sup>{' '}
+            × … × p<sub>k</sub>
+            <sup>
+              min(e<sub>k</sub>, f<sub>k</sub>)
+            </sup>
           </>
         }
         note={
-          <>
-            หา GCD อีกวิธีหนึ่งคือแยกทั้งสองจำนวนเป็นผลคูณของจำนวนเฉพาะ หาจำนวนเฉพาะที่<strong>ตรงกันทั้งสองฝั่ง</strong>{' '}
-            แล้วเลือก<strong>เลขชี้กำลังต่ำสุด</strong>ของแต่ละตัวมาคูณกัน เช่น <code>24 = 2³×3¹</code> และ <code>36 = 2²×3²</code>{' '}
-            — ตัวร่วมคือ 2 กับ 3 เลือกกำลังต่ำสุด <code>2²</code> กับ <code>3¹</code> คูณกันได้ <code>4×3 = 12</code>{' '}
-            (ข้อจำกัด: วิธีนี้<strong>ไม่ efficient</strong> เพราะยังไม่มีอัลกอริทึมที่มีประสิทธิภาพสำหรับแยกตัวประกอบเฉพาะของเลขจำนวนมาก
-            — ต่างจาก Euclidean Algorithm ที่เร็วกว่ามาก)
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>a</code>, <code>b</code> เป็นจำนวนเต็มบวก และเขียนทั้งคู่ด้วยจำนวนเฉพาะชุดเดียวกัน p
+                <sub>1</sub>, …, p<sub>k</sub> โดยยอมให้เลขชี้กำลังเป็น 0 ได้ คือ{' '}
+                <code>
+                  a = p<sub>1</sub>
+                  <sup>
+                    e<sub>1</sub>
+                  </sup>{' '}
+                  ⋯ p<sub>k</sub>
+                  <sup>
+                    e<sub>k</sub>
+                  </sup>
+                </code>{' '}
+                และ{' '}
+                <code>
+                  b = p<sub>1</sub>
+                  <sup>
+                    f<sub>1</sub>
+                  </sup>{' '}
+                  ⋯ p<sub>k</sub>
+                  <sup>
+                    f<sub>k</sub>
+                  </sup>
+                </code>
+              </>
+            }
+            claim={
+              <>
+                ตัวหารร่วมมากหาได้จากการหยิบจำนวนเฉพาะที่มีร่วมกัน แล้วเลือก<strong>เลขชี้กำลังที่น้อยกว่า</strong>
+                ของแต่ละตัวมาคูณกัน ตามสูตรด้านบน
+              </>
+            }
+            restate={
+              <>
+                เช่น <code>24 = 2³×3¹</code> และ <code>36 = 2²×3²</code> จะได้ <code>2²×3¹ = 12</code> —
+                วิธีนี้ถูกต้องเสมอแต่<strong>ไม่มีประสิทธิภาพ</strong> เพราะการแยกตัวประกอบเฉพาะของจำนวนขนาดใหญ่ยังทำได้ช้ามาก
+                ต่างจากขั้นตอนวิธียูคลิดที่เร็วกว่ามาก
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame

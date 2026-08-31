@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { CodeSyncPanel } from '@/components/widgets/CodeSyncPanel';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { rightToLeftExponentiationTrace, type ExpRoundStep } from '@/utils/algorithms/modular';
@@ -100,7 +100,11 @@ export function FastModExpVisualizer() {
       <DefinitionCard
         definition={
           <>
-            อัลกอริทึมในการคำนวณหาค่าของ <code>a^b mod n</code> อย่างมีประสิทธิภาพ
+            อัลกอริทึมในการคำนวณหาค่าของ{' '}
+            <code>
+              a<sup>b</sup> mod n
+            </code>{' '}
+            อย่างมีประสิทธิภาพ
             โดยมีจุดเด่นคือช่วยให้คำนวณผลลัพธ์ได้รวดเร็วมากและประหยัดหน่วยความจำ แม้ว่าตัวเลขฐาน (<code>a</code>)
             หรือตัวเลขชี้กำลัง (<code>b</code>) จะมีขนาดใหญ่โตมหาศาลก็ตาม อัลกอริทึมนี้มักถูกนำไปใช้ในระบบวิทยาการรหัสลับ (Cryptography)
             เช่น RSA Encryption และ Diffie-Hellman Key Exchange ซึ่งจำเป็นต้องจัดการกับตัวเลขที่มีความยาวหลายร้อยหลายพันบิต
@@ -108,15 +112,44 @@ export function FastModExpVisualizer() {
         }
         formula={
           <>
-            <b>a</b>^<b>b</b> mod <b>n</b> — คำนวณด้วยการยกกำลังสองซ้ำ (repeated squaring)
+            <b>a</b>
+            <sup>
+              <b>b</b>
+            </sup>{' '}
+            mod <b>n</b> — คำนวณด้วยการยกกำลังสองซ้ำ (repeated squaring)
           </>
         }
         note={
-          <>
-            คำนวณ <code>a^b mod n</code> ได้เร็วขึ้นด้วย Binary Exponentiation — ทุกรอบตรวจว่า <code>exponent</code> เป็นเลขคี่ไหม
-            (คูณเข้า <code>result</code> ถ้าใช่) แล้วยกกำลังสอง <code>base</code> และหาร <code>exponent</code> ด้วย 2 ไปเรื่อย ๆ{' '}
-            <strong>จากประมาณ b ขั้นตอน เหลือเพียง log₂(b) ขั้นตอน</strong>
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>a</code> ∈ ℤ, <code>b</code> เป็นจำนวนเต็มที่ไม่เป็นลบ และ <code>n</code> เป็นจำนวนเต็มบวก
+                โดยเขียน b ในรูปเลขฐานสองได้เป็น{' '}
+                <code>
+                  b = b<sub>0</sub>·2<sup>0</sup> + b<sub>1</sub>·2<sup>1</sup> + … + b<sub>t</sub>·2<sup>t</sup>
+                </code>{' '}
+                เมื่อแต่ละบิต b<sub>i</sub> เป็น 0 หรือ 1
+              </>
+            }
+            claim={<>เนื่องจากกำลังของ a แตกตามหลักฐานสองของ b ได้ เราจึงคูณเฉพาะกำลังที่ตรงกับบิต 1 เท่านั้น</>}
+            equation={
+              <>
+                a<sup>b</sup> mod n = ผลคูณของ a<sup>
+                  2<sup>i</sup>
+                </sup>{' '}
+                mod n &nbsp;เฉพาะ i ที่ b<sub>i</sub> = 1
+              </>
+            }
+            restate={
+              <>
+                หรือกล่าวได้ว่า แทนที่จะคูณ a ซ้ำ b ครั้ง เราสร้าง a<sup>
+                  2<sup>i</sup>
+                </sup>{' '}
+                ด้วยการยกกำลังสองซ้ำ ๆ แล้วหยิบมาคูณเฉพาะตัวที่ตรงกับบิต 1{' '}
+                <strong>จากประมาณ b ขั้นตอน จึงเหลือเพียง log₂(b) ขั้นตอน</strong>
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame

@@ -4,7 +4,7 @@ import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
 import { ClockModulo } from '@/components/widgets/ClockModulo';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { lcgSequence } from '@/utils/algorithms/lcg';
 import styles from './PseudorandomVisualizer.module.css';
@@ -59,11 +59,26 @@ export function PseudorandomVisualizer() {
           </>
         }
         note={
-          <>
-            Linear Congruential Generator (LCG) สร้างลำดับตัวเลขที่ดู "สุ่ม" จากสูตรตายตัว ลองนึกภาพเข็มวิ่งบนนาฬิกา{' '}
-            <code>mod m</code> — แต่ละก้าวคำนวณจากตำแหน่งเดิมด้วย <code>a</code>, <code>c</code> ที่กำหนดไว้ ไม่ได้สุ่มจริง
-            เดี๋ยวก็จะ<strong>วนกลับมาซ้ำ</strong> (period) เพราะตำแหน่งบนนาฬิกามีจำกัดแค่ m ช่อง
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>m</code> ∈ ℤ และ <code>m</code> ≥ 2 (เรียกว่ามอดุลัส) และให้ <code>a</code>, <code>c</code>,{' '}
+                <code>x₀</code> ∈ ℤ โดยที่ 0 ≤ a, c, x₀ &lt; m
+              </>
+            }
+            claim={
+              <>
+                <strong>ตัวสร้างเชิงเส้นสมภาค (LCG)</strong> นิยามลำดับ x<sub>0</sub>, x<sub>1</sub>, x<sub>2</sub>, …
+                ด้วยความสัมพันธ์เวียนเกิดด้านบน คือนำพจน์ก่อนหน้ามาคูณ a บวก c แล้วหารเอาเศษด้วย m
+              </>
+            }
+            restate={
+              <>
+                เนื่องจากค่าที่เป็นไปได้มีจำกัดเพียง m ค่า ลำดับนี้จึงต้อง<strong>วนกลับมาซ้ำ</strong>เสมอ
+                ความยาวของช่วงก่อนเริ่มวนซ้ำเรียกว่าคาบ (period) — จึงเป็นการสุ่มเทียม ไม่ใช่การสุ่มจริง
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame

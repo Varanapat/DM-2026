@@ -4,7 +4,7 @@ import { SliderInput } from '@/components/widgets/SliderInput';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import styles from './CongruenceVisualizer.module.css';
 
@@ -100,11 +100,21 @@ export function CongruenceVisualizer() {
           </>
         }
         note={
-          <>
-            <code>a</code> และ <code>b</code> จะ<strong>สมภาค</strong>กัน mod n ก็ต่อเมื่อ <code>n</code> หาร (a − b) ลงตัว
-            ลองนึกภาพนาฬิกา n ช่องแบบเดียวกับ modular arithmetic — a กับ b congruent กันแปลว่าเข็มชี้ไปที่{' '}
-            <strong>"ช่องเดียวกัน"</strong> แม้จะเป็นคนละตัวเลข เช่น 2 กับ 14 อยู่ช่องเดียวกันบนนาฬิกา 12 ช่อง
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>a</code>, <code>b</code> ∈ ℤ และ <code>n</code> เป็นจำนวนเต็มบวก
+              </>
+            }
+            claim={
+              <>
+                เรากล่าวว่า <strong>a สมภาคกับ b มอดุโล n</strong> เขียนแทนด้วย <code>a ≡ b (mod n)</code>{' '}
+                ก็ต่อเมื่อ n หารผลต่าง (a − b) ลงตัว ตามสูตรด้านบน ซึ่งเขียนให้เห็นภาพได้อีกแบบว่า
+              </>
+            }
+            equation={<>a = b + kn &nbsp;สำหรับบางจำนวนเต็ม k</>}
+            restate={<>หรือกล่าวได้ว่า a และ b เหลือเศษเท่ากันเมื่อหารด้วย n</>}
+          />
         }
       />
       <VisualizerFrame
@@ -116,9 +126,9 @@ export function CongruenceVisualizer() {
       }
       monitor={
         <ExecutionMonitor
-          hint={`เลข 0–${NUMBERS_MAX} กำลังจะบินไปหาบ้าน mod ${n} ของตัวเอง — กด ▶`}
+          hint={`เราจะจัดกลุ่มเลขตามเศษที่ได้จากการหารด้วย ${n} โดยเลขที่เหลือเศษเท่ากันจะถือว่าอยู่ "บ้าน" เดียวกัน กด ▶ เพื่อดูเลข 0–${NUMBERS_MAX} ทยอยบินไปเข้าบ้านของตัวเอง`}
           lines={monitorLines}
-          badge={isDone ? `${n} classes — ทุกเลขมีบ้านเดียว` : undefined}
+          badge={isDone ? `แบ่งได้ ${n} กลุ่ม — ทุกเลขมีบ้านของตัวเองเพียงบ้านเดียว` : undefined}
         />
       }
       footer={

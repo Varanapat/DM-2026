@@ -3,7 +3,7 @@ import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { isPrime, primeFactorization } from '@/utils/algorithms/factorization';
 import { buildTree, layoutTree, countSplits, altFirstPair, type PlacedNode } from './factorTreeModel';
@@ -109,7 +109,10 @@ export function PrimeFactorizationVisualizer() {
       });
     }
     if (isUniqueness) {
-      lines.push({ emphasis: true, text: 'แตกต้นไม้คนละทาง แต่ใบ prime ชุดเดียวกันเสมอ (FTA)' });
+      lines.push({
+        emphasis: true,
+        text: 'ไม่ว่าจะเลือกแตกต้นไม้คนละทางกันแค่ไหน สุดท้ายก็จะได้ใบที่เป็นจำนวนเฉพาะชุดเดิมเสมอ นี่คือทฤษฎีบทหลักมูลฐานของเลขคณิต (FTA)',
+      });
     }
     return lines;
   }, [splitLines, visibleSplits, isFormula, isUniqueness, n, powers]);
@@ -122,15 +125,31 @@ export function PrimeFactorizationVisualizer() {
         }
         formula={
           <>
-            <b>n</b> = p1^e1 × p2^e2 × ... × pk^ek
+            <b>n</b> = p<sub>1</sub><sup>e<sub>1</sub></sup> × p<sub>2</sub><sup>e<sub>2</sub></sup> × … × p
+            <sub>k</sub>
+            <sup>
+              e<sub>k</sub>
+            </sup>
           </>
         }
         note={
-          <>
-            ทุกจำนวนเต็มที่มากกว่า 1 เขียนเป็นผลคูณของจำนวนเฉพาะได้<strong>แบบเดียวเท่านั้น</strong> (ไม่นับลำดับ) — ทฤษฎีบทมูลฐานของเลขคณิต
-            ลองนึกภาพ <code>n</code> เหมือนโมเลกุลที่แยกเป็นอะตอม (จำนวนเฉพาะ) ได้ ไม่ว่าจะเริ่มแยกจากตัวประกอบไหนก่อน
-            สุดท้ายจะได้ชุดอะตอมชุดเดียวกันเสมอ
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>n</code> ∈ ℤ และ <code>n</code> &gt; 1
+              </>
+            }
+            claim={
+              <>
+                <strong>ทฤษฎีบทหลักมูลฐานของเลขคณิต</strong> กล่าวว่า n เขียนเป็นผลคูณของจำนวนเฉพาะได้เพียงแบบเดียวเท่านั้น
+                (ไม่นับลำดับการเขียน) ตามสูตรด้านบน โดยที่ p<sub>1</sub> &lt; p<sub>2</sub> &lt; … &lt; p<sub>k</sub>{' '}
+                เป็นจำนวนเฉพาะ และเลขชี้กำลัง e<sub>1</sub>, …, e<sub>k</sub> เป็นจำนวนเต็มบวก
+              </>
+            }
+            restate={
+              <>หรือกล่าวได้ว่า ไม่ว่าจะเริ่มแยกตัวประกอบจากตัวไหนก่อน สุดท้ายก็จะได้จำนวนเฉพาะชุดเดิมเสมอ</>
+            }
+          />
         }
       />
       <VisualizerFrame

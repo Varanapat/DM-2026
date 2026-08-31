@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { StepController } from '@/components/widgets/StepController';
 import { NumberGrid } from '@/components/widgets/NumberGrid';
 import type { CellState } from '@/components/widgets/NumberGrid';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import styles from './DivisibilityVisualizer.module.css';
 
@@ -58,15 +58,24 @@ export function DivisibilityVisualizer() {
           }
           formula={
             <>
-              <b>a</b> | <b>b</b> &nbsp;⟺&nbsp; ∃ k ∈ ℤ ที่ทำให้ <b>b</b> = <b>a</b> × k
+              <b>a</b> | <b>b</b> &nbsp;⟺&nbsp; <b>b</b> = <b>a</b>k &nbsp;สำหรับบางจำนวนเต็ม k
             </>
           }
           note={
-            <>
-              อ่านว่า <strong>“a หาร b ลงตัว”</strong> — จะจริงก็ต่อเมื่อมีจำนวนเต็ม <code>k</code> ที่คูณ <code>a</code>{' '}
-              แล้วได้ <code>b</code> พอดี ไม่มีเศษเหลือ ลองนึกภาพครูจัดนักเรียน <code>b</code> คน ลงเป็นแถวละ{' '}
-              <code>a</code> คน — ถ้าลงตัวพอดีทุกแถว นั่นคือ a | b
-            </>
+            <DefinitionStatement
+              given={
+                <>
+                  ให้ <code>a</code>, <code>b</code> ∈ ℤ และ <code>a</code> ≠ 0
+                </>
+              }
+              claim={
+                <>
+                  เรากล่าวว่า <strong>a หาร b ลงตัว</strong> เขียนแทนด้วย <code>a | b</code> ก็ต่อเมื่อมีจำนวนเต็ม{' '}
+                  <code>k</code> ที่ทำให้ <code>b = ak</code> ตามสูตรด้านบน
+                </>
+              }
+              restate={<>หรือกล่าวได้ว่า b เป็นผลคูณของ a กับจำนวนเต็มบางจำนวน จึงหารแล้วไม่มีเศษเหลือ</>}
+            />
           }
         />
 

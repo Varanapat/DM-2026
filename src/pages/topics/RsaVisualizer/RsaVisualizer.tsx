@@ -3,7 +3,7 @@ import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { gcd } from '@/utils/algorithms/euclidean';
 import { extGcdSteps } from '@/utils/algorithms/extendedEuclidean';
@@ -79,15 +79,32 @@ export function RsaVisualizer() {
         }
         formula={
           <>
-            c = m^e mod n &nbsp;·&nbsp; m = c^d mod n
+            c = m<sup>e</sup> mod n &nbsp;·&nbsp; m = c<sup>d</sup> mod n
           </>
         }
         note={
-          <>
-            RSA คือระบบเข้ารหัสแบบกุญแจสาธารณะ อาศัยความจริงที่ว่าแยกตัวประกอบเฉพาะของเลขจำนวนมหาศาลนั้นยากมาก
-            แต่การยกกำลังมอดุลาร์กลับทำได้เร็ว ลองนึกภาพกุญแจสองดอก ดอกหนึ่งใช้ล็อกกล่อง (<code>public key</code>{' '}
-            เผยแพร่ให้ใครก็ได้) อีกดอกใช้ปลดล็อกเท่านั้น (<code>private key</code> เก็บเป็น<strong>ความลับ</strong>)
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>p</code>, <code>q</code> เป็นจำนวนเฉพาะที่ต่างกัน กำหนด <code>n = pq</code> และ{' '}
+                <code>φ(n) = (p−1)(q−1)</code> จากนั้นเลือก <code>e</code> ที่ <code>gcd(e, φ(n)) = 1</code> แล้วหา{' '}
+                <code>d</code> ที่เป็นตัวผกผันมอดุลาร์ของ e คือ <code>ed ≡ 1 (mod φ(n))</code>
+              </>
+            }
+            claim={
+              <>
+                เราเข้ารหัสข้อความ <code>m</code> ให้เป็นข้อความลับ <code>c</code> และถอดรหัสกลับ ด้วยการยกกำลังมอดุลาร์
+                ตามสูตรด้านบน
+              </>
+            }
+            restate={
+              <>
+                โดย <code>(n, e)</code> คือ<strong>กุญแจสาธารณะ</strong> ที่เผยแพร่ให้ใครก็ได้ ส่วน <code>(n, d)</code> คือ
+                <strong>กุญแจส่วนตัว</strong>ที่ต้องเก็บเป็นความลับ — ความปลอดภัยของระบบมาจากการที่แยกตัวประกอบของ n
+                เพื่อหา φ(n) นั้นทำได้ยากมากเมื่อ n มีขนาดใหญ่
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame
@@ -220,8 +237,9 @@ export function RsaVisualizer() {
           <div className={styles.attacker}>
             <p className={styles.attackerTitle}>😈 ลองแอบอ่าน: มีแค่ (n={n}, e={e}, c={c})</p>
             <p className={styles.attackerBody}>
-              ต้องการ d → ต้องรู้ φ(n) → ต้องแยก <span className={styles.attackerShake}>n = {n} = ? × ?</span> —
-              factorization คือกำแพงที่กันทั้งระบบ
+              ถ้าอยากถอดรหัสก็ต้องรู้ค่า d ซึ่งจะรู้ได้ต้องรู้ φ(n) ก่อน และการจะรู้ φ(n) ก็ต้องแยกตัวประกอบ{' '}
+              <span className={styles.attackerShake}>n = {n} = ? × ?</span> ให้ได้ก่อนเช่นกัน
+              เมื่อ n มีขนาดใหญ่มาก การแยกตัวประกอบนี้จะใช้เวลานานจนทำไม่ไหว จึงเปรียบได้กับกำแพงที่คอยปกป้องทั้งระบบเอาไว้
             </p>
           </div>
         )}

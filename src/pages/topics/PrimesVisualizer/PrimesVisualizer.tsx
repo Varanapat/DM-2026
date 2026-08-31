@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
@@ -163,10 +163,26 @@ export function PrimesVisualizer() {
           </>
         }
         note={
-          <>
-            หากไม่มีจำนวนเต็มใดตั้งแต่ <code>2</code> ถึง <code>√n</code> ที่หาร <code>n</code> ลงตัว แปลว่า <code>n</code>{' '}
-            จะไม่มีตัวหารอื่นอีกเลย นอกจาก <code>1</code> และตัวมันเอง
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>p</code> ∈ ℤ และ <code>p</code> &gt; 1
+              </>
+            }
+            claim={
+              <>
+                เรากล่าวว่า <strong>p เป็นจำนวนเฉพาะ</strong> ก็ต่อเมื่อตัวหารที่เป็นบวกของ p มีเพียงสองจำนวนเท่านั้น คือ 1
+                และ p เอง นั่นคือ
+              </>
+            }
+            equation={<>ถ้า d | p และ d &gt; 0 แล้ว d = 1 หรือ d = p</>}
+            restate={
+              <>
+                ในทางปฏิบัติเราไม่ต้องไล่ตรวจตัวหารทุกตัว เพราะถ้า p ไม่ใช่จำนวนเฉพาะ ตัวประกอบสองตัวที่คูณกันได้ p
+                จะต้องมีตัวหนึ่งไม่เกิน <code>√p</code> เสมอ จึงตรวจแค่จำนวนเฉพาะที่ไม่เกิน √p ก็พอ ตามสูตรด้านบน
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame

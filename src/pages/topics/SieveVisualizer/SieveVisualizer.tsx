@@ -5,7 +5,7 @@ import type { CellState, CellDecor } from '@/components/widgets/NumberGrid';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { sieveRounds, primesUpTo } from '@/utils/algorithms/sieve';
 import styles from './SieveVisualizer.module.css';
@@ -94,11 +94,25 @@ export function SieveVisualizer() {
           </>
         }
         note={
-          <>
-            วางตัวเลข <code>2</code> ถึง <code>n</code> เรียงกันเป็นแถว สมมติทุกตัวเป็นจำนวนเฉพาะไว้ก่อน จากนั้นทำซ้ำสองจังหวะ:
-            หยิบเลขตัวเล็กสุดที่ยังไม่ถูกขีด — นั่นคือ<strong>จำนวนเฉพาะตัวถัดไป</strong> — แล้วขีดฆ่าพหุคูณของมันทั้งหมดทิ้ง
-            เพราะเลขที่หารด้วยมันลงตัวย่อมไม่ใช่จำนวนเฉพาะ
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>n</code> ∈ ℤ และ <code>n</code> ≥ 2 และให้ <code>S</code> = {'{ 2, 3, …, n }'}
+              </>
+            }
+            claim={
+              <>
+                เซต <code>C</code> ด้านบนคือเซตของ<strong>จำนวนประกอบ</strong>ใน S ซึ่งได้จากการนำจำนวนเฉพาะแต่ละตัวที่ไม่เกิน
+                √n มาคูณด้วย 2, 3, 4, … (ไม่นับตัวจำนวนเฉพาะเอง)
+              </>
+            }
+            restate={
+              <>
+                หรือกล่าวได้ว่า สมาชิกที่เหลือจากการตัด C ออกจาก S คือจำนวนเฉพาะทั้งหมดที่ไม่เกิน n
+                ซึ่งเป็นหลักการทำงานของตะแกรงเอราทอสเทนีส
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame

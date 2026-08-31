@@ -3,7 +3,7 @@ import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { gcd } from '@/utils/algorithms/euclidean';
 import { multiplyTrail } from '@/utils/algorithms/modular';
@@ -108,21 +108,47 @@ export function FermatVisualizer() {
         definition={
           <>
             ทฤษฎีทางทฤษฎีจำนวนที่กล่าวว่า หาก <code>p</code> เป็นจำนวนเฉพาะ และ <code>a</code> เป็นจำนวนเต็มใด ๆ แล้ว{' '}
-            <code>a^p − a</code> จะหารด้วย <code>p</code>{' '}
-            ลงตัวเสมอ หรือเขียนในรูปสมภาค (Congruence) ได้ว่า <code>a^p ≡ a (mod p)</code> และในกรณีที่ a กับ p
-            ไม่มีตัวประกอบร่วมกันหรือ ห.ร.ม. เป็น 1 (gcd(a, p) = 1) จะได้รูปแบบที่พบบ่อยคือ <code>a^(p−1) ≡ 1 (mod p)</code>
+            <code>
+              a<sup>p</sup> − a
+            </code>{' '}
+            จะหารด้วย <code>p</code> ลงตัวเสมอ หรือเขียนในรูปสมภาค (Congruence) ได้ว่า{' '}
+            <code>
+              a<sup>p</sup> ≡ a (mod p)
+            </code>{' '}
+            และในกรณีที่ a กับ p ไม่มีตัวประกอบร่วมกันหรือ ห.ร.ม. เป็น 1 (gcd(a, p) = 1) จะได้รูปแบบที่พบบ่อยคือ{' '}
+            <code>
+              a<sup>p−1</sup> ≡ 1 (mod p)
+            </code>
           </>
         }
         formula={
           <>
-            <b>a</b>^(<b>p</b>−1) ≡ 1 (mod <b>p</b>)
+            <b>a</b><sup><b>p</b>−1</sup> ≡ 1 (mod <b>p</b>)
           </>
         }
         note={
-          <>
-            ถ้า <code>p</code> เป็นจำนวนเฉพาะ และ gcd(a, p) = 1 แล้ว <code>a^(p−1) mod p</code> จะเท่ากับ 1 เสมอ ลองนึกภาพคูณ{' '}
-            <code>a</code> เข้าตัวเองซ้ำ ๆ บนนาฬิกา mod p — พอคูณครบ p−1 ครั้ง เข็มจะ<strong>วนกลับมาชี้ที่ 1</strong> เสมอ
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>p</code> เป็นจำนวนเฉพาะ และ <code>a</code> ∈ ℤ โดยที่ p หาร a ไม่ลงตัว (นั่นคือ{' '}
+                <code>gcd(a, p) = 1</code>)
+              </>
+            }
+            claim={
+              <>
+                <strong>ทฤษฎีบทเล็กของแฟร์มา</strong> กล่าวว่า การยกกำลัง a ขึ้นไป p−1 ครั้งแล้วหารด้วย p
+                จะเหลือเศษเป็น 1 เสมอ ตามสูตรด้านบน
+              </>
+            }
+            restate={
+              <>
+                และถ้าไม่ต้องมีเงื่อนไข gcd จะได้รูปทั่วไปที่ใช้ได้กับจำนวนเต็ม a ทุกตัวว่า{' '}
+                <code>
+                  a<sup>p</sup> ≡ a (mod p)
+                </code>
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame

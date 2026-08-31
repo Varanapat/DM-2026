@@ -10,6 +10,17 @@ export interface DefinitionCardProps {
   formulaLabel?: string;
   /** the boxed formula line, e.g. <><b>a</b> | <b>b</b> ⟺ ...</> */
   formula: ReactNode;
-  /** the story/analogy paragraph below the formula — use <code>/<strong> for emphasis */
+  /** the block below the formula — normally a <DefinitionStatement> spelling out the formal definition */
   note: ReactNode;
+}
+
+export interface DefinitionStatementProps {
+  /** the "ให้ a, b ∈ ℤ และ a ≠ 0" line naming the objects and their conditions */
+  given: ReactNode;
+  /** the "เรากล่าวว่า … ก็ต่อเมื่อ …" line stating the definition itself */
+  claim: ReactNode;
+  /** the displayed condition/equation the claim resolves to */
+  equation?: ReactNode;
+  /** an optional closing "หรือกล่าวได้ว่า …" restatement in plain words */
+  restate?: ReactNode;
 }

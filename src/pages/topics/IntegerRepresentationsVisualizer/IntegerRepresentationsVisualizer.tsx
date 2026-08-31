@@ -3,7 +3,7 @@ import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { baseConversionSteps, digitChar, digitsToString } from '@/utils/algorithms/baseConversion';
 import styles from './IntegerRepresentationsVisualizer.module.css';
@@ -56,11 +56,26 @@ export function IntegerRepresentationsVisualizer() {
           </>
         }
         note={
-          <>
-            แทนจำนวนเต็มในฐานอื่นทำได้ด้วยการหาร <code>n</code> ด้วยฐาน <code>b</code> ซ้ำ ๆ แล้วเก็บเศษไว้ทีละหลัก
-            ลองนึกภาพหารตัวตั้งด้วยฐานไปเรื่อย ๆ จนตัวตั้งเหลือ 0 — เศษที่ได้ทีละรอบคือหลักของคำตอบ แต่ต้อง
-            <strong>อ่านย้อนกลับ</strong> จากรอบสุดท้ายไปรอบแรก เพราะรอบแรกให้หลักที่มีค่าน้อยที่สุด
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>b</code> ∈ ℤ และ <code>b</code> &gt; 1 และให้ <code>n</code> เป็นจำนวนเต็มบวก
+              </>
+            }
+            claim={<>จำนวนเต็มบวก n ทุกจำนวนเขียนแทนในฐาน b ได้เพียงแบบเดียวเท่านั้น ในรูป</>}
+            equation={
+              <>
+                n = a<sub>k</sub>·b<sup>k</sup> + a<sub>k−1</sub>·b<sup>k−1</sup> + … + a<sub>1</sub>·b + a<sub>0</sub>
+              </>
+            }
+            restate={
+              <>
+                โดยที่ a<sub>i</sub> ∈ ℤ และ 0 ≤ a<sub>i</sub> &lt; b ทุกตัว และ a<sub>k</sub> ≠ 0 —
+                เราเรียกลำดับหลัก a<sub>k</sub>…a<sub>1</sub>a<sub>0</sub> ว่า<strong>การแทน n ในฐาน b</strong>{' '}
+                ซึ่งหาได้จากการหาร n ด้วย b ซ้ำ ๆ แล้วเก็บเศษไว้ทีละหลัก ตามสูตรด้านบน
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame
