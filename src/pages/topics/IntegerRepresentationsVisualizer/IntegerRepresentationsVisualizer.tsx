@@ -44,6 +44,12 @@ export function IntegerRepresentationsVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            วิธีการจัดเก็บและแสดงค่าจำนวนเต็ม (ทั้งจำนวนบวก ลบ และศูนย์) ในรูปแบบสัญญาณดิจิทัลหรือรหัสฐานสอง (Binary: 0 และ 1)
+            เพื่อให้คอมพิวเตอร์และวงจรดิจิทัลสามารถประมวลผลและคำนวณได้
+          </>
+        }
         formula={
           <>
             <b>n</b> = <b>b</b>·q₀ + a₀ , &nbsp;q₀ = <b>b</b>·q₁ + a₁ , &nbsp;...

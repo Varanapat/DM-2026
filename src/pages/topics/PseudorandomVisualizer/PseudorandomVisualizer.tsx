@@ -47,6 +47,12 @@ export function PseudorandomVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            ชุดข้อมูลตัวเลขที่ดูเหมือนว่าถูกสุ่มขึ้นมาอย่างไม่มีระเบียบ แต่ความจริงแล้วถูกสร้างขึ้นจากขั้นตอนวิธีทางคณิตศาสตร์แบบกำหนดผลลัพธ์ล่วงหน้า
+            (Deterministic Algorithm)
+          </>
+        }
         formula={
           <>
             x<sub>n+1</sub> = (<b>a</b>·x<sub>n</sub> + <b>c</b>) mod <b>m</b>

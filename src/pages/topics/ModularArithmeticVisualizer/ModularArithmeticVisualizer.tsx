@@ -60,6 +60,11 @@ export function ModularArithmeticVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            ระบบการคำนวณทางคณิตศาสตร์ที่เกี่ยวข้องกับเศษเหลือจากการหารจำนวนเต็มด้วยจำนวนคงที่จำนวนหนึ่ง ซึ่งเรียกว่า มอดุลัส (Modulus)
+          </>
+        }
         formula={
           <>
             <b>a</b> mod <b>n</b> = <b>a</b> − <b>n</b> × ⌊a/n⌋

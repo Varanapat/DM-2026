@@ -117,6 +117,9 @@ export function PrimeFactorizationVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>การเขียนจำนวนนับในรูปการคูณของตัวประกอบที่เป็นจำนวนเฉพาะ</>
+        }
         formula={
           <>
             <b>n</b> = p1^e1 × p2^e2 × ... × pk^ek

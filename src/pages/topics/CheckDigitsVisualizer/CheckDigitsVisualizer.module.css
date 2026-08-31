@@ -1,7 +1,102 @@
-.hint {
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.modeToggle {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--color-border);
+  gap: 2px;
+}
+
+.modeBtn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
   font-size: var(--fs-sm);
+  font-weight: 600;
   color: var(--color-text-muted);
-  text-align: center;
+  min-height: var(--touch-target-min);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.modeBtnActive {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.stageToggle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  gap: 2px;
+}
+
+.stageBtn {
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  min-height: var(--touch-target-min);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.stageBtnActive {
+  background: var(--color-secondary);
+  color: var(--color-secondary-contrast);
+}
+
+.resetBtn {
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.resetBtn:hover {
+  transform: translateY(-1px);
+  color: var(--color-text);
+}
+
+.nextBtn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  min-height: var(--touch-target-min);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.nextBtn:hover {
+  transform: translateY(-1px);
+}
+
+.nextBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.stage2Footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .canvas {
@@ -10,6 +105,43 @@
   align-items: center;
   gap: var(--space-4);
   padding: var(--space-2) 0;
+}
+
+.stageTitle {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  text-align: center;
+}
+
+.stageDesc {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 520px;
+}
+
+.mainInput {
+  width: min(100%, 360px);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: none;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.mainInput:focus-visible {
+  outline: 2px solid var(--color-accent);
+}
+
+.incompleteNote {
+  font-size: var(--fs-sm);
+  color: var(--color-secondary);
+  text-align: center;
 }
 
 .barcodeRow {
@@ -29,10 +161,15 @@
 .digitBtn {
   width: 40px;
   height: 52px;
+  border: none;
+  outline: none;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 0;
+  appearance: none;
   font-family: var(--font-mono);
   font-size: var(--fs-lg);
   font-weight: 700;
@@ -43,6 +180,10 @@
 
 .digitBtn:hover {
   transform: translateY(-2px);
+}
+
+.digitBtn:focus-visible {
+  outline: 2px solid var(--color-accent);
 }
 
 .digitBtnDone {
@@ -68,6 +209,12 @@
   color: var(--color-text-muted);
 }
 
+.checkDigitReceived {
+  background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+  color: var(--color-accent);
+  outline: 2px dashed var(--color-accent);
+}
+
 .weightTag {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -77,4 +224,86 @@
 .sumReadout {
   font-size: var(--fs-sm);
   color: var(--color-text-muted);
+}
+
+.resultBanner {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-success) 16%, transparent);
+  color: var(--color-success);
+  border: 1.5px solid var(--color-success);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  animation: verifyIn var(--transition-base) ease-out;
+}
+
+.guessRow {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.guessBtn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  background: var(--color-border);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  min-height: var(--touch-target-min);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.guessBtnActive {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.verifyPanel {
+  max-width: 480px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  animation: verifyIn var(--transition-base) ease-out;
+}
+
+.verifyPanelOk {
+  background: color-mix(in srgb, var(--color-success) 16%, transparent);
+  color: var(--color-success);
+  border: 1.5px solid var(--color-success);
+}
+
+.verifyPanelBad {
+  background: color-mix(in srgb, var(--color-danger) 14%, transparent);
+  color: var(--color-danger);
+  border: 1.5px solid var(--color-danger);
+}
+
+.verifyVerdict {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+}
+
+.verifyGuessNote {
+  font-size: var(--fs-sm);
+  opacity: 0.85;
+}
+
+@keyframes verifyIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verifyPanel,
+  .resultBanner {
+    animation: none;
+  }
 }

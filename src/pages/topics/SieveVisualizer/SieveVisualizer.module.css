@@ -14,6 +14,13 @@
   align-items: center;
 }
 
+.sqrtHint {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-secondary);
+  text-align: center;
+}
+
 .inputGroup {
   display: flex;
   align-items: center;

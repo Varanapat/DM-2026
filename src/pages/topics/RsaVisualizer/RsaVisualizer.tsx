@@ -72,6 +72,11 @@ export function RsaVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            ระบบการเข้ารหัสข้อมูลแบบอสมมาตร (Asymmetric Encryption) ที่ใช้กุญแจสองดอกคู่กัน คือกุญแจสาธารณะสำหรับเข้ารหัสและกุญแจส่วนตัวสำหรับถอดรหัส
+          </>
+        }
         formula={
           <>
             c = m^e mod n &nbsp;·&nbsp; m = c^d mod n

@@ -14,39 +14,58 @@ export function modPow(a: number, e: number, n: number): number {
   return result;
 }
 
-export interface ModPowStep {
-  /** bit position counted from MSB (0 = leftmost) */
-  bitIndex: number;
-  bit: 0 | 1;
-  /** result after the square (null on the very first bit — nothing to square yet) */
-  squared: number | null;
-  /** result after the conditional multiply (null when bit = 0) */
-  multiplied: number | null;
-  /** register value at the end of this bit's step */
+export interface ExpRoundStep {
+  /** 1-based round number */
+  round: number;
+  exponentBefore: number;
+  isOdd: boolean;
+  resultBefore: number;
+  /** same as resultBefore when exponentBefore is even (multiply skipped) */
+  resultAfter: number;
+  baseBefore: number;
+  /** baseBefore² before the mod reduction */
+  baseSquared: number;
+  baseAfter: number;
+  exponentAfter: number;
+}
+
+export interface RightToLeftExpTrace {
+  base: number;
+  n: number;
+  steps: ExpRoundStep[];
   result: number;
 }
 
-/** MSB-first square-and-multiply trace: one step per binary digit of e. */
-export function modPowSteps(a: number, e: number, n: number): { bits: (0 | 1)[]; steps: ModPowStep[]; result: number } {
-  const base = ((Math.trunc(a) % n) + n) % n;
-  const exp = Math.max(Math.trunc(e), 0);
-  const bits = exp
-    .toString(2)
-    .split('')
-    .map((c) => (c === '1' ? 1 : 0) as 0 | 1);
-
-  const steps: ModPowStep[] = [];
+/** Classic right-to-left (LSB-first) binary exponentiation: each round checks
+ * whether the exponent is odd (multiply result by base if so), squares the
+ * base, and halves the exponent — repeated until the exponent reaches 0. */
+export function rightToLeftExponentiationTrace(a: number, e: number, n: number): RightToLeftExpTrace {
+  const base0 = ((Math.trunc(a) % n) + n) % n;
+  let exponent = Math.max(Math.trunc(e), 0);
   let result = 1 % n;
-  bits.forEach((bit, bitIndex) => {
-    const squared = bitIndex === 0 ? null : (result * result) % n;
-    let current = squared ?? result;
-    const multiplied = bit === 1 ? (current * base) % n : null;
-    if (multiplied !== null) current = multiplied;
-    result = current;
-    steps.push({ bitIndex, bit, squared, multiplied, result });
-  });
+  let base = base0;
+  const steps: ExpRoundStep[] = [];
+  let round = 1;
 
-  return { bits, steps, result };
+  while (exponent > 0) {
+    const exponentBefore = exponent;
+    const isOdd = exponentBefore % 2 === 1;
+    const resultBefore = result;
+    const resultAfter = isOdd ? (result * base) % n : result;
+    const baseBefore = base;
+    const baseSquared = base * base;
+    const baseAfter = baseSquared % n;
+    const exponentAfter = Math.floor(exponentBefore / 2);
+
+    steps.push({ round, exponentBefore, isOdd, resultBefore, resultAfter, baseBefore, baseSquared, baseAfter, exponentAfter });
+
+    result = resultAfter;
+    base = baseAfter;
+    exponent = exponentAfter;
+    round++;
+  }
+
+  return { base: base0, n, steps, result };
 }
 
 /** gcd(k, n) for every k in 1..n — the totient scan trace. */

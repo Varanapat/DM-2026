@@ -89,6 +89,11 @@ export function CongruenceVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            การที่จำนวนเต็มสองจำนวนหารด้วยจำนวนเต็มบวกเดียวกันแล้วเหลือเศษเท่ากัน
+          </>
+        }
         formula={
           <>
             <b>a</b> ≡ <b>b</b> (mod <b>n</b>) &nbsp;⟺&nbsp; <b>n</b> | (<b>a</b> − <b>b</b>)

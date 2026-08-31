@@ -91,6 +91,13 @@ export function EulerTotientVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            ฟังก์ชันในทางทฤษฎีจำนวนที่ใช้นับจำนวนเต็มบวก <code>m</code> ทั้งหมดที่น้อยกว่าหรือเท่ากับ <code>n</code>{' '}
+            ซึ่งเป็นจำนวนเฉพาะสัมพัทธ์ (coprime หรือ relatively prime) กับ <code>n</code> (กล่าวคือ ห.ร.ม. ของ m และ n
+            มีค่าเท่ากับ 1 หรือ gcd(m, n) = 1)
+          </>
+        }
         formula={
           <>
             φ(<b>n</b>) = จำนวน <b>k</b> ใน [1, n] ที่ gcd(<b>k</b>, <b>n</b>) = 1
