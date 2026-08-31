@@ -49,6 +49,12 @@ export function ClassicalCiphersVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            วิธีการแปลงข้อความปกติ (Plaintext) ให้กลายเป็นข้อความลับ (Ciphertext) โดยใช้มือหรืออุปกรณ์กลไกง่าย ๆ ในอดีต
+            ก่อนที่จะมีคอมพิวเตอร์และระบบดิจิทัลเข้ามาช่วยคำนวณทางคณิตศาสตร์ที่ซับซ้อน
+          </>
+        }
         formula={
           <>
             Shift: E(p) = (p + <b>b</b>) mod 26 &nbsp;·&nbsp; Affine: E(p) = (<b>a</b>p + <b>b</b>) mod 26

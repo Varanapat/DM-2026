@@ -68,6 +68,33 @@
   gap: var(--space-4);
 }
 
+.ruleList {
+  align-self: flex-start;
+  list-style: disc;
+  padding-left: var(--space-5);
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  line-height: 1.7;
+  text-align: left;
+}
+
+.ruleSubList {
+  list-style: circle;
+  padding-left: var(--space-5);
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.ruleDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  border-radius: 999px;
+  background: var(--color-secondary);
+  vertical-align: middle;
+}
+
 .timelineWrapper {
   position: relative;
 }

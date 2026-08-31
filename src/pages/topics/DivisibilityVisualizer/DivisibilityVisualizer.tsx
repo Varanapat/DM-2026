@@ -51,6 +51,11 @@ export function DivisibilityVisualizer() {
   return (
     <TopicPageStack>
         <DefinitionCard
+          definition={
+            <>
+              การที่จำนวนเต็มจำนวนหนึ่งหารด้วยจำนวนเต็มอีกจำนวนหนึ่งได้ผลลัพธ์เป็นจำนวนเต็มพอดีโดยไม่มีเศษเหลือ
+            </>
+          }
           formula={
             <>
               <b>a</b> | <b>b</b> &nbsp;⟺&nbsp; ∃ k ∈ ℤ ที่ทำให้ <b>b</b> = <b>a</b> × k

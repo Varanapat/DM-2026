@@ -85,6 +85,13 @@ export function CrtVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            ทฤษฎีบทในทางทฤษฎีจำนวนที่กล่าวถึงการหาจำนวนเต็ม <code>x</code> ซึ่งสอดคล้องกับระบบสมการสมภาค (Modular Equations)
+            หลาย ๆ สมการพร้อมกัน โดยที่ตัวหาร (Modulus) ในแต่ละสมการเป็นจำนวนเฉพาะสัมพัทธ์กัน
+            (Pairwise Coprime) และการันตีว่าจะมีผลเฉลยชุดเดียวเมื่อคิดแบบมอดูโลด้วยผลคูณของตัวหารทั้งหมด
+          </>
+        }
         formula={
           <>
             <b>x</b> ≡ a1 (mod m1), <b>x</b> ≡ a2 (mod m2), ...

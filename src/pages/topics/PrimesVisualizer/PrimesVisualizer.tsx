@@ -114,21 +114,18 @@ export function PrimesVisualizer() {
       testPrimes.map((p, i) => {
         const tested = i < stepsShown;
         const state: 'pending' | 'clear' | 'hit' = tested ? (steps[i].divides ? 'hit' : 'clear') : 'pending';
-        return { prime: p, state };
+        return { prime: p, state, remainder: n % p };
       }),
-    [testPrimes, stepsShown, steps],
+    [testPrimes, stepsShown, steps, n],
   );
 
+  const sqrtHintText =
+    testPrimes.length > 0
+      ? `√${n} ≈ ${sqrtN.toFixed(2)} → เช็คตัวหารเฉพาะได้ถึง ${limit}: ${testPrimes.join(', ')}`
+      : `√${n} ≈ ${sqrtN.toFixed(2)} → ไม่มีตัวหารเฉพาะให้เช็ค (n เล็กเกินไป)`;
+
   const monitorLines = useMemo<MonitorLine[]>(() => {
-    const lines: MonitorLine[] = [
-      {
-        text:
-          testPrimes.length > 0
-            ? `√${n} ≈ ${sqrtN.toFixed(2)} → เช็คตัวหารเฉพาะได้ถึง ${limit}: ${testPrimes.join(', ')}`
-            : `√${n} ≈ ${sqrtN.toFixed(2)} → ไม่มีตัวหารเฉพาะให้เช็ค (n เล็กเกินไป)`,
-        swatchColor: 'var(--color-secondary)',
-      },
-    ];
+    const lines: MonitorLine[] = [];
     steps.slice(0, stepsShown).forEach((s) => {
       lines.push({
         swatchColor: s.divides ? 'var(--color-danger)' : 'var(--color-success)',
@@ -144,7 +141,7 @@ export function PrimesVisualizer() {
       });
     }
     return lines;
-  }, [testPrimes, n, sqrtN, limit, steps, stepsShown, isVerdict, prime, foundDivisor]);
+  }, [n, steps, stepsShown, isVerdict, prime, foundDivisor]);
 
   const changeN = (value: number) => {
     setN(value);
@@ -155,15 +152,20 @@ export function PrimesVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            จำนวนเต็มบวกที่มากกว่า 1 และมีตัวหารที่เป็นบวกหรือตัวประกอบเพียง 2 จำนวนเท่านั้น คือ <code>1</code> และตัวมันเอง
+          </>
+        }
         formula={
           <>
-            <b>n</b> เป็น prime &nbsp;⟺&nbsp; ตัวหารของ <b>n</b> มีแค่ 1 กับ <b>n</b>
+            <b>n</b> เป็น prime &nbsp;⟺&nbsp; ไม่มีจำนวนเฉพาะ <b>p</b> ≤ √<b>n</b> ที่หาร <b>n</b> ลงตัว
           </>
         }
         note={
           <>
-            จำนวนเฉพาะคือจำนวนเต็มที่มากกว่า 1 และไม่มีตัวหารอื่นนอกจาก 1 กับตัวมันเอง ลองนึกภาพจัดจุด <code>n</code> จุดเป็นสี่เหลี่ยมผืนผ้า
-            (แถว × คอลัมน์) — ถ้าจัดได้แบบเดียวคือแถวเดียว (1×n) แปลว่า <code>n</code> เป็น <strong>จำนวนเฉพาะ</strong>
+            หากไม่มีจำนวนเต็มใดตั้งแต่ <code>2</code> ถึง <code>√n</code> ที่หาร <code>n</code> ลงตัว แปลว่า <code>n</code>{' '}
+            จะไม่มีตัวหารอื่นอีกเลย นอกจาก <code>1</code> และตัวมันเอง
           </>
         }
       />
@@ -180,6 +182,8 @@ export function PrimesVisualizer() {
               🎲 สุ่มเลขใหม่
             </button>
           </div>
+
+          <p className={styles.sqrtHint}>{sqrtHintText}</p>
 
           <div className={styles.guessSection}>
             {!isVerdict && (
@@ -227,6 +231,24 @@ export function PrimesVisualizer() {
       }
     >
       <div className={styles.canvas}>
+        <ul className={styles.ruleList}>
+          <li>
+            เงื่อนไข:
+            <ul className={styles.ruleSubList}>
+              <li>
+                1. ถ้าหารลงตัว (ไม่มี
+                <span className={styles.ruleDot} aria-hidden="true" />
+                จุดสีแดง) → <strong>n เป็น composite</strong>
+              </li>
+              <li>
+                2. ถ้าหารไม่ลงตัว (มี
+                <span className={styles.ruleDot} aria-hidden="true" />
+                จุดสีแดง) → ลองจำนวนเฉพาะตัวถัดไป
+              </li>
+            </ul>
+          </li>
+        </ul>
+
         {!isSqrtBeat && (
           <p className={styles.arrangementLabel}>
             {isVerdict
@@ -240,21 +262,27 @@ export function PrimesVisualizer() {
         {testPrimes.length > 0 && (
           <div className={isSqrtBeat ? `${styles.chipsRow} ${styles.chipsRowSpotlight}` : styles.chipsRow}>
             {primeChips.map((c, i) => (
-              <span
-                key={c.prime}
-                style={isSqrtBeat ? ({ '--index': i } as React.CSSProperties) : undefined}
-                className={
-                  c.state === 'hit'
-                    ? `${styles.chip} ${styles.chipHit}`
-                    : c.state === 'clear'
-                      ? `${styles.chip} ${styles.chipClear}`
-                      : isSqrtBeat
-                        ? `${styles.chip} ${styles.chipSpotlight}`
-                        : styles.chip
-                }
-              >
-                {c.prime}
-              </span>
+              <div key={c.prime} className={styles.chipCol}>
+                <span
+                  style={isSqrtBeat ? ({ '--index': i } as React.CSSProperties) : undefined}
+                  className={
+                    c.state === 'hit'
+                      ? `${styles.chip} ${styles.chipHit}`
+                      : c.state === 'clear'
+                        ? `${styles.chip} ${styles.chipClear}`
+                        : isSqrtBeat
+                          ? `${styles.chip} ${styles.chipSpotlight}`
+                          : styles.chip
+                  }
+                >
+                  {c.prime}
+                </span>
+                {c.state !== 'pending' && (
+                  <span className={c.state === 'hit' ? `${styles.chipResult} ${styles.chipResultHit}` : styles.chipResult}>
+                    {c.state === 'hit' ? 'ลงตัว!' : `เศษ ${c.remainder}`}
+                  </span>
+                )}
+              </div>
             ))}
           </div>
         )}

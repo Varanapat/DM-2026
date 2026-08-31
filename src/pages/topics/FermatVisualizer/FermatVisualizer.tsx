@@ -105,6 +105,14 @@ export function FermatVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            ทฤษฎีทางทฤษฎีจำนวนที่กล่าวว่า หาก <code>p</code> เป็นจำนวนเฉพาะ และ <code>a</code> เป็นจำนวนเต็มใด ๆ แล้ว{' '}
+            <code>a^p − a</code> จะหารด้วย <code>p</code>{' '}
+            ลงตัวเสมอ หรือเขียนในรูปสมภาค (Congruence) ได้ว่า <code>a^p ≡ a (mod p)</code> และในกรณีที่ a กับ p
+            ไม่มีตัวประกอบร่วมกันหรือ ห.ร.ม. เป็น 1 (gcd(a, p) = 1) จะได้รูปแบบที่พบบ่อยคือ <code>a^(p−1) ≡ 1 (mod p)</code>
+          </>
+        }
         formula={
           <>
             <b>a</b>^(<b>p</b>−1) ≡ 1 (mod <b>p</b>)

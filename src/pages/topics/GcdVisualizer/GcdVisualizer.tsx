@@ -114,6 +114,11 @@ export function GcdVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            จำนวนเต็มบวกที่มากที่สุด ที่สามารถหารจำนวนเต็มตั้งแต่สองจำนวนขึ้นไปลงตัวทั้งหมด (โดยที่จำนวนเหล่านั้นไม่ใช่ศูนย์พร้อมกัน)
+          </>
+        }
         formula={
           <>
             gcd(<b>a</b>, <b>b</b>) = gcd(<b>b</b>, <b>a</b> mod <b>b</b>)
@@ -234,7 +239,26 @@ export function GcdVisualizer() {
           </div>
         </div>
       ) : (
-        <TileFitEuclidean a={a} b={b} beatIndex={euclid.beatIndex} />
+        <div className={styles.canvas}>
+          <ul className={styles.ruleList}>
+            <li>
+              เงื่อนไข:
+              <ul className={styles.ruleSubList}>
+                <li>
+                  1. ตัดจัตุรัสแล้ว<strong>ยังมีเศษเหลือ</strong> (มี
+                  <span className={styles.ruleDot} aria-hidden="true" />
+                  แถบเส้นประค้างอยู่) → เอาเศษที่เหลือไปตัดต่อในรอบถัดไป
+                </li>
+                <li>
+                  2. ตัดจัตุรัสแล้ว<strong>พอดีไม่เหลือเศษเลย</strong> (ไม่มี
+                  <span className={styles.ruleDot} aria-hidden="true" />
+                  แถบเส้นประเหลือ) → หยุด! ด้านของจัตุรัสตัวสุดท้ายคือ GCD
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <TileFitEuclidean a={a} b={b} beatIndex={euclid.beatIndex} />
+        </div>
       )}
       </VisualizerFrame>
     </TopicPageStack>

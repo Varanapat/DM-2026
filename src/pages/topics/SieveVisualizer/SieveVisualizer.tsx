@@ -61,36 +61,31 @@ export function SieveVisualizer() {
   const sqrtMax = Math.sqrt(max);
   const basePrimes = useMemo(() => rounds.map((r) => r.prime), [rounds]);
 
+  const sqrtHintText =
+    basePrimes.length > 0
+      ? `√${max} ≈ ${sqrtMax.toFixed(2)} → เช็คตัวหารเฉพาะได้ถึง ${Math.floor(sqrtMax)}: ${basePrimes.join(', ')}`
+      : `√${max} ≈ ${sqrtMax.toFixed(2)} → ไม่มีตัวหารเฉพาะให้เช็ค (n เล็กเกินไป)`;
+
   const monitorLines = useMemo<MonitorLine[]>(() => {
-    const lines: MonitorLine[] = [
-      {
-        swatchColor: 'var(--color-secondary)',
-        text:
-          basePrimes.length > 0
-            ? `√${max} ≈ ${sqrtMax.toFixed(2)} → เช็คตัวหารเฉพาะได้ถึง ${Math.floor(sqrtMax)}: ${basePrimes.join(', ')}`
-            : `√${max} ≈ ${sqrtMax.toFixed(2)} → ไม่มีตัวหารเฉพาะให้เช็ค (n เล็กเกินไป)`,
-      },
-      ...rounds.slice(0, Math.max(currentRound + 1, 0)).map((round, r) => ({
-        swatchColor: ROUND_PALETTE[r % ROUND_PALETTE.length],
-        text:
-          round.crossed.length > 0
-            ? `รอบ p=${round.prime}: ตัด ${round.crossed.length} ตัว (เริ่มที่ ${round.prime}²=${round.firstCross})`
-            : `รอบ p=${round.prime}: ไม่เหลืออะไรให้ตัด`,
-      })),
-    ];
+    const lines: MonitorLine[] = rounds.slice(0, Math.max(currentRound + 1, 0)).map((round, r) => ({
+      swatchColor: ROUND_PALETTE[r % ROUND_PALETTE.length],
+      text:
+        round.crossed.length > 0
+          ? `รอบ p=${round.prime}: ตัด ${round.crossed.length} ตัว (เริ่มที่ ${round.prime}²=${round.firstCross})`
+          : `รอบ p=${round.prime}: ไม่เหลืออะไรให้ตัด`,
+    }));
     if (isFinal) {
       lines.push({ text: `หยุดได้เพราะ p ถัดไป > √${max} — ที่เหลือคือจำนวนเฉพาะทั้งหมด`, emphasis: true });
     }
     return lines;
-  }, [rounds, currentRound, isFinal, max, basePrimes, sqrtMax]);
+  }, [rounds, currentRound, isFinal, max]);
 
   return (
     <TopicPageStack>
       <DefinitionCard
         definition={
           <>
-            ตะแกรงเอราทอสเทนีส คือ อัลกอริทึมสำหรับหาจำนวนเฉพาะทั้งหมดในช่วง <code>2</code> ถึง <code>n</code> โดยไล่ "ขีดฆ่า"
-            พหุคูณของจำนวนเฉพาะทีละตัว สิ่งที่รอดเหลือคือจำนวนเฉพาะ
+            ขั้นตอนวิธี (algorithm) โบราณที่ใช้ในการค้นหาจำนวนเฉพาะทั้งหมดที่มีค่าน้อยกว่าหรือเท่ากับจำนวนเต็ม <code>n</code> ที่กำหนด
           </>
         }
         formula={
@@ -124,6 +119,8 @@ export function SieveVisualizer() {
               🎲 สุ่มเลขใหม่
             </button>
           </div>
+
+          <p className={styles.sqrtHint}>{sqrtHintText}</p>
         </div>
       }
       monitor={

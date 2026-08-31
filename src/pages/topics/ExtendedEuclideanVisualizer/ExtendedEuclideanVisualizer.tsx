@@ -75,6 +75,13 @@ export function ExtendedEuclideanVisualizer() {
   return (
     <TopicPageStack>
       <DefinitionCard
+        definition={
+          <>
+            ขั้นตอนวิธีทางคณิตศาสตร์ที่ใช้หาตัวหารร่วมมาก (ห.ร.ม. หรือ GCD) ของจำนวนเต็มสองจำนวน <code>a</code> และ{' '}
+            <code>b</code> พร้อมทั้งหาค่าสัมประสิทธิ์ของเบซูต์
+            (Bézout coefficients) <code>x</code> และ <code>y</code> ที่สอดคล้องกับสมการเชิงเส้น <code>ax + by = gcd(a, b)</code>
+          </>
+        }
         formula={
           <>
             <b>a</b>x + <b>b</b>y = gcd(<b>a</b>, <b>b</b>)
