@@ -4,7 +4,7 @@ import { NumberGrid } from '@/components/widgets/NumberGrid';
 import type { CellState } from '@/components/widgets/NumberGrid';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { gcd, divisors } from '@/utils/algorithms/euclidean';
 import { computeEuclideanBeats, tileFitMonitorData, TileFitEuclidean } from './TileFitEuclidean';
@@ -125,10 +125,26 @@ export function GcdVisualizer() {
           </>
         }
         note={
-          <>
-            ตัวหารร่วมมาก (GCD) หาได้ด้วยการหารเศษซ้ำ ๆ ลองนึกภาพกระดาษสี่เหลี่ยมผืนผ้าขนาด <code>a × b</code>{' '}
-            ต้องการตัดเป็น<strong>สี่เหลี่ยมจัตุรัสใหญ่สุด</strong>ที่พอดีโดยไม่เหลือเศษ — ตัดซ้ำ ๆ จากกระดาษที่เหลือ ขนาดสุดท้ายที่พอดีคือ gcd(a, b)
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>a</code>, <code>b</code> ∈ ℤ โดยที่ <code>a</code> และ <code>b</code> ไม่เป็นศูนย์พร้อมกัน
+              </>
+            }
+            claim={
+              <>
+                เรากล่าวว่า <code>d</code> เป็น<strong>ตัวหารร่วมมาก</strong>ของ a และ b เขียนแทนด้วย{' '}
+                <code>gcd(a, b)</code> ก็ต่อเมื่อ d เป็นจำนวนเต็มบวกที่มากที่สุดซึ่ง <code>d | a</code> และ{' '}
+                <code>d | b</code> ทั้งคู่ และค่านี้หาได้จากสมบัติด้านบน โดยมีจุดหยุดคือ <code>gcd(a, 0) = |a|</code>
+              </>
+            }
+            restate={
+              <>
+                หรือกล่าวได้ว่า การแทนที่คู่ (a, b) ด้วยคู่ (b, a mod b) ซ้ำ ๆ จะลดขนาดของปัญหาลงเรื่อย ๆ
+                จนเศษเป็นศูนย์ และตัวตั้งที่เหลืออยู่ในตอนนั้นคือ gcd(a, b)
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame
@@ -242,17 +258,17 @@ export function GcdVisualizer() {
         <div className={styles.canvas}>
           <ul className={styles.ruleList}>
             <li>
-              เงื่อนไข:
+              ในแต่ละรอบเราจะตัดจัตุรัสให้ได้มากที่สุด แล้วดูว่าเหลือเศษหรือไม่ ซึ่งจะเจอได้ 2 กรณี:
               <ul className={styles.ruleSubList}>
                 <li>
-                  1. ตัดจัตุรัสแล้ว<strong>ยังมีเศษเหลือ</strong> (มี
+                  1. ถ้าตัดจัตุรัสแล้ว<strong>ยังมีเศษเหลืออยู่</strong> (สังเกตจากแถบเส้นประ
                   <span className={styles.ruleDot} aria-hidden="true" />
-                  แถบเส้นประค้างอยู่) → เอาเศษที่เหลือไปตัดต่อในรอบถัดไป
+                  ที่ค้างอยู่) แปลว่ายังไม่จบ ให้นำเศษที่เหลือนั้นไปตัดต่อในรอบถัดไป
                 </li>
                 <li>
-                  2. ตัดจัตุรัสแล้ว<strong>พอดีไม่เหลือเศษเลย</strong> (ไม่มี
+                  2. ถ้าตัดจัตุรัสแล้ว<strong>ลงตัวพอดีไม่เหลือเศษเลย</strong> (ไม่มีแถบเส้นประ
                   <span className={styles.ruleDot} aria-hidden="true" />
-                  แถบเส้นประเหลือ) → หยุด! ด้านของจัตุรัสตัวสุดท้ายคือ GCD
+                  เหลืออยู่) แปลว่าจบแล้ว ให้หยุดทันที โดยความยาวด้านของจัตุรัสที่ตัดในรอบสุดท้ายคือค่า GCD ที่เราต้องการ
                 </li>
               </ul>
             </li>

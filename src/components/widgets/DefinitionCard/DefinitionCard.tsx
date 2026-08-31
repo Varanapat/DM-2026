@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { DefinitionCardProps } from './DefinitionCard.types';
+import type { DefinitionCardProps, DefinitionStatementProps } from './DefinitionCard.types';
 import styles from './DefinitionCard.module.css';
 
 export function DefinitionCard({ title = 'นิยาม', definition, formulaLabel = 'สูตร', formula, note }: DefinitionCardProps) {
@@ -12,8 +12,21 @@ export function DefinitionCard({ title = 'นิยาม', definition, formulaL
       {definition && <p className={styles.definitionText}>{definition}</p>}
       {definition && <p className={styles.subLabel}>{formulaLabel}</p>}
       <div className={styles.formula}>{formula}</div>
-      <p className={styles.defNote}>{note}</p>
+      <div className={styles.defNote}>{note}</div>
     </section>
+  );
+}
+
+/** The formal "ให้ … / เรากล่าวว่า … ก็ต่อเมื่อ … / <equation> / หรือกล่าวได้ว่า …" wording
+ * every topic states below its formula. */
+export function DefinitionStatement({ given, claim, equation, restate }: DefinitionStatementProps) {
+  return (
+    <div className={styles.statement}>
+      <p className={styles.statementGiven}>{given}</p>
+      <p className={styles.statementClaim}>{claim}</p>
+      {equation && <p className={styles.statementEquation}>{equation}</p>}
+      {restate && <p className={styles.statementRestate}>{restate}</p>}
+    </div>
   );
 }
 

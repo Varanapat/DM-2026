@@ -4,7 +4,7 @@ import { SliderInput } from '@/components/widgets/SliderInput';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import styles from './ModularArithmeticVisualizer.module.css';
 
@@ -71,11 +71,25 @@ export function ModularArithmeticVisualizer() {
           </>
         }
         note={
-          <>
-            <code>a mod n</code> คือเศษที่เหลือจากการหาร <code>a</code> ด้วย <code>n</code> ลองนึกภาพนาฬิกาที่มี <code>n</code>{' '}
-            ชั่วโมงแทนที่จะเป็น 12 เข็มเดินวนจาก 0 ไป n−1 แล้ว<strong>วนกลับมาที่ 0</strong> ใหม่เรื่อย ๆ — a mod n
-            คือช่องที่เข็มจะไปหยุด
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ <code>a</code> ∈ ℤ และ <code>n</code> เป็นจำนวนเต็มบวก
+              </>
+            }
+            claim={
+              <>
+                ตามขั้นตอนวิธีการหาร (Division Algorithm) จะมีจำนวนเต็ม <code>q</code> และ <code>r</code>{' '}
+                เพียงชุดเดียวเท่านั้นที่ทำให้
+              </>
+            }
+            equation={<>a = nq + r โดยที่ 0 ≤ r &lt; n</>}
+            restate={
+              <>
+                เรานิยามให้ <strong>a mod n</strong> คือเศษเหลือ r ตัวนั้น ซึ่งคำนวณตรง ๆ ได้จากสูตรด้านบน
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame

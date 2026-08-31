@@ -3,7 +3,7 @@ import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { crtSearchSteps, pairwiseCoprime, type CrtCongruence } from '@/utils/algorithms/crt';
 import styles from './CrtVisualizer.module.css';
@@ -94,15 +94,38 @@ export function CrtVisualizer() {
         }
         formula={
           <>
-            <b>x</b> ≡ a1 (mod m1), <b>x</b> ≡ a2 (mod m2), ...
+            <b>x</b> ≡ a<sub>1</sub> (mod m<sub>1</sub>), &nbsp;<b>x</b> ≡ a<sub>2</sub> (mod m<sub>2</sub>), &nbsp;…,
+            &nbsp;<b>x</b> ≡ a<sub>k</sub> (mod m<sub>k</sub>)
           </>
         }
         note={
-          <>
-            ทฤษฎีบทเศษเหลือจีนผสานระบบสมภาคหลายสมการให้เหลือ<strong>คำตอบเดียว</strong> ลองนึกภาพนาฬิกาหลายเรือนเดินพร้อมกัน
-            แต่ละเรือนมี moduli ต่างกัน — ถ้า moduli ทุกคู่ coprime กัน จะมีตัวเลข <code>x</code> เพียงค่าเดียว (ในช่วง mod
-            m1×m2×...) ที่ทำให้นาฬิกาทุกเรือนชี้ถูกพร้อมกันหมด
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้{' '}
+                <code>
+                  m<sub>1</sub>, m<sub>2</sub>, …, m<sub>k</sub>
+                </code>{' '}
+                เป็นจำนวนเต็มบวกที่เป็นจำนวนเฉพาะสัมพัทธ์กันเป็นคู่ ๆ (คือ{' '}
+                <code>
+                  gcd(m<sub>i</sub>, m<sub>j</sub>) = 1
+                </code>{' '}
+                ทุกครั้งที่ i ≠ j)
+              </>
+            }
+            claim={
+              <>
+                <strong>ทฤษฎีบทเศษเหลือจีน</strong> รับประกันว่าระบบสมภาคด้านบนมีคำตอบเสมอ
+                และมีคำตอบเพียงชุดเดียวเมื่อคิดมอดุโลผลคูณของตัวหารทั้งหมด
+              </>
+            }
+            equation={
+              <>
+                M = m<sub>1</sub> × m<sub>2</sub> × … × m<sub>k</sub>
+              </>
+            }
+            restate={<>หรือกล่าวได้ว่า คำตอบทุกตัวของระบบนี้สมภาคกันหมดมอดุโล M</>}
+          />
         }
       />
       <VisualizerFrame

@@ -3,7 +3,7 @@ import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import { encryptSteps, modInverse, type CipherMode } from '@/utils/algorithms/cipher';
 import styles from './ClassicalCiphersVisualizer.module.css';
@@ -61,11 +61,26 @@ export function ClassicalCiphersVisualizer() {
           </>
         }
         note={
-          <>
-            การเข้ารหัสแบบ Shift/Affine แปลงตัวอักษรเป็นตัวเลข (A=0..Z=25) แล้วบวกหรือคูณด้วยกุญแจภายใต้ mod 26
-            ลองนึกภาพหมุนวงล้อตัวอักษร 26 ช่อง — เข้ารหัสคือหมุนไปข้างหน้าตามกุญแจ ถอดรหัสคือหมุนกลับ (Affine ต้องใช้
-            <strong>ตัวผกผันมอดุลาร์</strong> <code>a⁻¹</code> จาก Extended Euclidean ในการถอดรหัส)
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้ตัวอักษรแต่ละตัวถูกแทนด้วยจำนวนเต็ม <code>p</code> โดย A = 0, B = 1, …, Z = 25 และให้{' '}
+                <code>a</code>, <code>b</code> ∈ ℤ เป็นกุญแจ
+              </>
+            }
+            claim={
+              <>
+                ฟังก์ชันเข้ารหัสด้านบนนิยามไว้สองแบบ คือ<strong>แบบเลื่อน (Shift)</strong> ที่บวกกุญแจ b เข้าไป และ
+                <strong>แบบอัฟฟีน (Affine)</strong> ที่คูณด้วย a ก่อนแล้วจึงบวก b
+              </>
+            }
+            restate={
+              <>
+                โดยแบบอัฟฟีนต้องมีเงื่อนไข <code>gcd(a, 26) = 1</code> เพื่อให้ a มี<strong>ตัวผกผันมอดุลาร์</strong>{' '}
+                <code>a⁻¹</code> และถอดรหัสกลับได้ด้วย <code>D(c) = a⁻¹(c − b) mod 26</code>
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame

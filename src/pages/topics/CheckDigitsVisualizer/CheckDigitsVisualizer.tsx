@@ -3,7 +3,7 @@ import { StepController } from '@/components/widgets/StepController';
 import { VisualizerFrame } from '@/components/widgets/VisualizerFrame';
 import { ExecutionMonitor } from '@/components/widgets/ExecutionMonitor';
 import type { MonitorLine } from '@/components/widgets/ExecutionMonitor';
-import { DefinitionCard, TopicPageStack } from '@/components/widgets/DefinitionCard';
+import { DefinitionCard, DefinitionStatement, TopicPageStack } from '@/components/widgets/DefinitionCard';
 import { useVisualizerBeats } from '@/hooks/useVisualizerBeats';
 import {
   upcCheckDigitSteps,
@@ -217,21 +217,52 @@ export function CheckDigitsVisualizer() {
         formula={
           mode === 'upc' ? (
             <>
-              3·(d1+d3+...+d11) + (d2+d4+...+d10) + <b>check</b> ≡ 0 (mod 10)
+              3·(d<sub>1</sub>+d<sub>3</sub>+…+d<sub>11</sub>) + (d<sub>2</sub>+d<sub>4</sub>+…+d<sub>10</sub>) +{' '}
+              <b>check</b> ≡ 0 (mod 10)
             </>
           ) : (
             <>
-              10·d1 + 9·d2 + ... + 2·d9 + <b>check</b> ≡ 0 (mod 11) &nbsp; — &nbsp; check = 10 เขียนเป็น <b>X</b>
+              10·d<sub>1</sub> + 9·d<sub>2</sub> + … + 2·d<sub>9</sub> + <b>check</b> ≡ 0 (mod 11) &nbsp; — &nbsp; check
+              = 10 เขียนเป็น <b>X</b>
             </>
           )
         }
         note={
-          <>
-            บทเรียนนี้แบ่งเป็น 2 ขั้นตอน: <strong>1) สร้างชุดตัวเลขของคุณเอง พร้อมดูขั้นตอนการคำนวณ Check Digit</strong> และ{' '}
-            <strong>2) ตรวจสอบความถูกต้องของชุดตัวเลข</strong> — สามารถสลับโหมด UPC และ ISBN-10 ได้ด้านบน ทั้งสองระบบใช้หลักการเดียวกัน
-            เพียงแต่น้ำหนักและฐานมอดุลัสต่างกัน (ระบบ ISBN-10 ใช้มอดุลัส 11 จึงอาจได้ Check Digit เป็นตัวอักษร <code>X</code>{' '}
-            แทนตัวเลขในบางกรณี)
-          </>
+          <DefinitionStatement
+            given={
+              <>
+                ให้{' '}
+                <code>
+                  d<sub>1</sub>d<sub>2</sub>…d<sub>k</sub>
+                </code>{' '}
+                เป็นชุดตัวเลข โดยที่ k−1 หลักแรกคือหลักข้อมูล และหลักสุดท้าย{' '}
+                <code>
+                  d<sub>k</sub>
+                </code>{' '}
+                คือหลักตรวจสอบ พร้อมด้วยน้ำหนักประจำหลัก{' '}
+                <code>
+                  w<sub>1</sub>, …, w<sub>k</sub>
+                </code>{' '}
+                และมอดุลัส <code>n</code>
+              </>
+            }
+            claim={
+              <>
+                เรานิยาม <strong>เลขตรวจสอบ</strong> ให้เป็นหลักที่เลือกมาเพื่อทำให้ผลรวมถ่วงน้ำหนักของทุกหลักสอดคล้องกับสมภาค
+              </>
+            }
+            equation={
+              <>
+                w<sub>1</sub>d<sub>1</sub> + w<sub>2</sub>d<sub>2</sub> + … + w<sub>k</sub>d<sub>k</sub> ≡ 0 (mod n)
+              </>
+            }
+            restate={
+              <>
+                โดยระบบ UPC ใช้ w = (3, 1, 3, 1, …) กับ n = 10 ส่วน ISBN-10 ใช้ w = (10, 9, …, 2, 1) กับ n = 11
+                (จึงอาจได้หลักตรวจสอบเป็น <code>X</code> แทนค่า 10) — ถ้าสมภาคนี้ไม่เป็นจริง แสดงว่าชุดตัวเลขนั้นผิด
+              </>
+            }
+          />
         }
       />
       <VisualizerFrame
